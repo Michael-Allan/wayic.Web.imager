@@ -1,7 +1,7 @@
-Installation instructions for project wayic.Web.imager
+Installation instructions for the waycast Web imager
 
     + Install the files of this project into `*COMMAND-DIRECTORY*/wayic/Web/imager/`.
-        / COMMAND-DIRECTORY is where all project installations related to the building project
+        / The command directory is where project installations dependent on Javanese Builder
           are accessible by their proper paths.  The present file, for example, would correctly
           be installed at `*COMMAND-DIRECTORY*/wayic/Web/imager/project_installation.brec`.
             : see `^^command directory$` @ http://reluk.ca/project/building/lexicon.brec
