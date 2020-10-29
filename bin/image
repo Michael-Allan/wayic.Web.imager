@@ -1,0 +1,54 @@
+#!/usr/bin/env --split-string=${JDK_HOME}/bin/java @wayic/Web/imager/java_arguments \c [SS]
+package wayic.Web.imager; // [AFN]
+
+// Usage:  image <PATH>…
+//
+// Changes to this file immediately affect the next runtime.  Treat it as a script.
+
+
+/** A shell command to …  It …
+  */
+public final class ImageCommand { // [AFN]
+
+
+
+    private ImageCommand() {}
+
+
+
+    /** Takes an `image` command from the shell.
+      */
+    public static void main( final String[] arguments ) {
+        if( arguments.length == 0 ){
+            System.err.println( "Usage: image <PATH>..." );
+            System.exit( 1 ); }
+        new ImageCommand().execute(); }
+
+
+
+////  P r i v a t e  ////////////////////////////////////////////////////////////////////////////////////
+
+
+    /** Executes the command.
+      */
+    private void execute() {
+        System.out.println( "image: Executing with imager `" + Imager.class.getName() + '`' ); // TEST
+        ; }}
+
+
+
+// NOTES
+// ─────
+//   AFN  Atypical file naming is allowed here.  ‘The compiler does not enforce the optional restriction
+//        defined at the end of JLS §7.6, that a type in a named package should exist in a file whose
+//        name is composed from the type name followed by the .java extension.’
+//        http://openjdk.java.net/jeps/330
+//        https://docs.oracle.com/javase/specs/jls/se15/html/jls-7.html#jls-7.6
+//
+//   SS · Here the long form `--split-string` (as opposed to `-S`) enables Emacs to recognize this file
+//        as Java source code.  See the note apropos ‘source-launch files encoded with a shebang’ at
+//        `http://reluk.ca/project/Java/Emacs/jmt-mode.el`.
+
+
+
+                                                        // Copyright © 2020  Michael Allan.  Licence MIT.
