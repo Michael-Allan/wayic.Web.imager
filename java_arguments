@@ -5,7 +5,7 @@
 
    --class-path /tmp/building/Makeshift/
     -enableassertions:wayic.Web.imager...
- # --enable-preview
+   --enable-preview
       # Any actual use of a preview feature will result in a compiler warning visible to the user
       # that (in most cases) cannot be suppressed.  https://openjdk.java.net/jeps/12
    --source 15
