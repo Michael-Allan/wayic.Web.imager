@@ -3,8 +3,7 @@ package wayic.Web.imager;
 // Changes to this file immediately affect the next build.  Treat it as a build script.
 
 
-/** A build target of the present project.  Shell commands will accept abbreviated target names:
-  * a target may be specified by any substring of its name that matches no other target name.
+/** A build target of the present project.
   */
 public enum BuildTarget {
 
