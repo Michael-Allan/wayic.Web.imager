@@ -1,26 +1,24 @@
 Installation instructions for the waycast Web imager
 
-    + Ensure the following projects are installed.
-        • Makeshift
-            : see http://reluk.ca/project/building/Makeshift/
-        • the Java programming project
-            : see http://reluk.ca/project/Java/
-        • the Breccia Web imager
-            : see http://reluk.ca/project/Breccia/Web/imager/
-    + Install the files of the present project.
-        >+ cd *COMMAND-DIRECTORY*/
-            / The command directory is where project installations are accessible by their proper paths.
-              The present project, for example, will shortly be accessible at `wayic/Web/imager`.
-                : see `^^command directory$` @ http://reluk.ca/project/building/lexicon.brec
-        >+ git clone http://reluk.ca/var/repo/git/wayic.Web.imager.git wayic/Web/imager
-    + Build the software.
-        >+ build Java class_files
-        >+ build Breccia/Web/imager class_files
-        >+ build wayic/Web/imager class_files
-        : see http://reluk.ca/project/building/Makeshift/build_instructions.brec
-    + Test your access to the `image` command.
-        >+ wayic/Web/imager/bin/image
-            / ⇒  Usage: image <PATH>...
+    initial set-up \ Only for projects with buildable software.
+        1+ Ensure the following projects are installed.
+            • Makeshift
+                : see http://reluk.ca/project/building/Makeshift/
+            • The Breccia Web imager
+                : see http://reluk.ca/project/Breccia/Web/imager/
+        2+ Install the files of the present project.
+            >+ cd <command-directory>/
+                / The command directory is where project installations are accessible by their
+                  proper paths.  The present project, for example, will shortly be accessible
+                  at `wayic/Web/imager`.
+                    : see `^^command directory$` @ http://reluk.ca/project/lexicon.brec
+            >+ git clone http://reluk.ca/var/repo/git/wayic.Web.imager.git wayic/Web/imager
+        3+ Build the software.
+            : join @ http://reluk.ca/project/Breccia/Web/imager/project_installation.brec
+            >+ build wayic/Web/imager class_files
+        4+ Test your access to the `image` command.
+            >+ wayic/Web/imager/bin/image -?
+                / ⇒  Usage: image <path>...
 
     Web publication
         • Breccian files
