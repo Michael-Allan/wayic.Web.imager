@@ -1,8 +1,6 @@
 #!/usr/bin/env --split-string=${JDK_HOME}/bin/java @wayic/Web/imager/java_arguments \c [SS]
 package wayic.Web.imager; // [AFN]
 
-// Usage:  image <PATH>…
-//
 // This command runs directly from the present source file, which is uncompiled during builds.
 
 import Breccia.Web.imager.ProductionFlow;
@@ -13,22 +11,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-/** A shell command to …  It …
+/** A shell command to make a Web image.
+  *
+  *     @see <a href='http://reluk.ca/project/wayic/Web/imager/bin/image.brec'>The `image` command</a>
   */
 public final class ImageCommand { // [AFN]
 
 
 
-    private ImageCommand( final String[] arguments ) {
-        this.arguments = arguments; }
+    private ImageCommand( final String[] arguments ) { this.arguments = arguments; }
 
 
 
     /** Takes an `image` command from the shell and executes it.
       */
     public static void main( final String[] arguments ) {
-        if( arguments.length == 0 ) {
-            System.err.println( "Usage: image <PATH>..." );
+        if( arguments.length == 0
+         || arguments[0].startsWith( "-" )) { // Allowing e.g. for a deliberate `-?`.
+            System.err.println( "Usage: image <path>..." );
             System.exit( 1 ); }
         new ImageCommand( arguments ).execute(); }
 

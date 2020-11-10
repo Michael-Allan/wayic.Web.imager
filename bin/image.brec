@@ -1,0 +1,21 @@
+`image` - Make a Web image
+
+        image <path>…
+
+    - The `image` command makes a Web image by producing, for each Breccian source file
+      stored at or under the given paths, a sibling file with a `.xht` extension.
+    - The working directory must be the command directory.
+        : see `^^working directory$` @ `^^shell commands$`
+          @ http://reluk.ca/project/Java/action_plan.brec
+
+
+    ━━━━━━━━━━
+     See also
+    ──────────
+        • `image`, of the Breccia Web imager
+            : see http://reluk.ca/project/Breccia/Web/imager/bin/clean.brec
+            / Not appropriate for use when the production set includes a waycast.
+
+
+
+                                                         \ Copyright © 2020  Michael Allan.  Licence MIT.
