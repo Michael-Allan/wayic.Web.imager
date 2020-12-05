@@ -15,7 +15,7 @@ Installation instructions for the waycast Web imager
             >+ git clone http://reluk.ca/var/repo/git/wayic.Web.imager.git wayic/Web/imager
         3+ Build the software.
             : join @ http://reluk.ca/project/Breccia/Web/imager/project_installation.brec
-            >+ build wayic/Web/imager class_files
+            >+ build wayic/Web/imager class-files
         4+ Test your access to the `image` command.
             >+ wayic/Web/imager/bin/image -?
                 / ⇒  Usage: image <path>...
