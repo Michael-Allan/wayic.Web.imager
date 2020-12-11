@@ -3,7 +3,8 @@ package wayic.Web.imager; // [AFN]
 
 // This command runs directly from the present source file, which is uncompiled during builds.
 
-import Breccia.Web.imager.*;
+import Breccia.Web.imager.BrecciaHTMLTransformer;
+import Breccia.Web.imager.ImageMould;
 import java.nio.file.Path;
 import Java.UserError;
 import java.util.HashSet;
@@ -14,7 +15,7 @@ import java.util.Set;
   *
   *     @see <a href='http://reluk.ca/project/wayic/Web/imager/bin/image.brec'>The `image` command</a>
   */
-public final class ImageCommand implements FileTransformMaker { // [AFN]
+public final class ImageCommand { // [AFN]
 
 
 
@@ -33,14 +34,6 @@ public final class ImageCommand implements FileTransformMaker { // [AFN]
 
 
 
-   // ━━━  F i l e   T r a n s f o r m   M a k e r  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-
-    public FileTransform makeFileTransform( final Path f ) {
-        return isWaycastFile(f)? new WaybreccianFileTransform(f): new BreccianFileTransform(f); }
-
-
-
 ////  P r i v a t e  ////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -53,16 +46,12 @@ public final class ImageCommand implements FileTransformMaker { // [AFN]
     private void execute() {
         final Set<Path> paths = new HashSet<>();
         for( final String argument: arguments ) paths.add( Path.of( argument ));
-        try { new ImageMould( paths, /*transformMaker*/ImageCommand.this ).formImage(); }
+        final WaybrecHTMLTransformer transformer = new WaybrecHTMLTransformer(
+          new BrecciaHTMLTransformer() );
+        try { new ImageMould( paths, transformer ).formImage(); }
         catch( final UserError x ) {
             System.err.println( "image: " + x.getMessage() );
-            System.exit( 1 ); }}
-
-
-
-    /** Answers whether `f` is contained in waycast.
-      */
-    private static boolean isWaycastFile( final Path f ) { return false; }} // Yet unimplemented.
+            System.exit( 1 ); }}}
 
 
 

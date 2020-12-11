@@ -6,6 +6,8 @@ Installation instructions for the waycast Web imager
                 : see http://reluk.ca/project/building/Makeshift/
             • The Breccia Web imager
                 : see http://reluk.ca/project/Breccia/Web/imager/
+            • Waybrec Parser
+                : see http://reluk.ca/project/wayic/Waybrec/parser/
         2+ Install the files of the present project.
             >+ cd <command-directory>/
                 / The command directory is where project installations are accessible by their
