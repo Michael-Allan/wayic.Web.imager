@@ -1,9 +1,13 @@
 package wayic.Web.imager;
 
 import Breccia.Web.imager.FileTransformer;
+import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import wayic.Waybrec.parser.WaybrecReader;
-import wayic.Waybrec.parser.WaybrecXTranslator;
+import wayic.Waybrec.parser.WaybrecCursor;
+import wayic.Waybrec.parser.WaybrecXCursor;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 
 public final class WaybrecHTMLTransformer implements FileTransformer {
@@ -19,13 +23,15 @@ public final class WaybrecHTMLTransformer implements FileTransformer {
    // ━━━  F i l e   T r a n s f o r m e r  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-    public @Override void transform( Path sourceFile ) {
+    public @Override void transform( Path sourceFile ) throws IOException {
         if( !isWaycastFile( sourceFile )) {
             plainTransformer.transform( sourceFile );
             return; }
-        try( final WaybrecReader source = new WaybrecReader( sourceFile );
-             final WaybrecXTranslator in = new WaybrecXTranslator( source ); ) {
-            for( ;; ) {
+        try( final InputStream byteSource = Files.newInputStream​( sourceFile );
+             final InputStreamReader charSource = new InputStreamReader( byteSource, UTF_8 )) {
+               // Cursor `in` does the buffering of `charSource` recommended by `InputStreamReader`.
+               // The underlying `byteSource` needs none.  https://stackoverflow.com/a/27347262/2402790
+            for( in.setMarkupSource( charSource );; ) {
                 // TODO, the actual transform.
                 if( in.hasNext() ) in.next();
                 else break; }}}
@@ -41,7 +47,11 @@ public final class WaybrecHTMLTransformer implements FileTransformer {
 
 
 
-    private final FileTransformer plainTransformer; }
+    private final FileTransformer plainTransformer;
+
+
+
+    private final WaybrecXCursor in = new WaybrecXCursor( new WaybrecCursor() ); }
 
 
 
