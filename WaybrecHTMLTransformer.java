@@ -7,7 +7,11 @@ import java.nio.file.Path;
 import wayic.Waybrec.parser.WaybrecCursor;
 import wayic.Waybrec.parser.WaybrecXCursor;
 
+import static Breccia.parser.BrecciaXCursor.EMPTY;
+import static Breccia.parser.BrecciaXCursor.START_DOCUMENT;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.logging.Level.FINE;
+import static wayic.Web.imager.Project.logger;
 
 
 public final class WaybrecHTMLTransformer implements FileTransformer {
@@ -27,11 +31,21 @@ public final class WaybrecHTMLTransformer implements FileTransformer {
         if( !isWaycastFile( sourceFile )) {
             plainTransformer.transform( sourceFile );
             return; }
+        // TODO below, share common code with `Breccia.Web.imager.BrecciaHTMLTransformer`.
         try( final InputStream byteSource = Files.newInputStream​( sourceFile );
              final InputStreamReader charSource = new InputStreamReader( byteSource, UTF_8 )) {
                // Cursor `in` does the buffering of `charSource` recommended by `InputStreamReader`.
                // The underlying `byteSource` needs none.  https://stackoverflow.com/a/27347262/2402790
-            for( in.setMarkupSource( charSource );; ) {
+            in.markupSource( charSource );
+            final int t = in.getEventType();
+            if( t == EMPTY ) {
+                logger.log( FINE, "Imaging empty source file: {0}", sourceFile );
+                final Path imageFile = sourceFile.resolveSibling( sourceFile.getFileName() + ".xht" );
+                Files.deleteIfExists( imageFile );
+                Files.createFile( imageFile );
+                return; }
+            assert t == START_DOCUMENT;
+            for( ;; ) {
                 // TODO, the actual transform.
                 if( in.hasNext() ) in.next();
                 else break; }}}
