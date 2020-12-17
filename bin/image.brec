@@ -2,8 +2,12 @@
 
         image <path>…
 
-    - The `image` command makes a Web image by producing, for each Breccian source file
-      stored at or under the given paths, a sibling file with a `.xht` extension.
+    - The `image` command makes a Web image.
+        - It ensures that each Breccian source file stored at or under the given paths
+          is accompanied by its image, a sibling namesake with a `.xht` extension.
+        - It ensures that any waycast stored at or under the given paths is properly imaged.
+        - It reforms any image file that does not postdate both its source
+          and all Breccian referents of its source.
     - The working directory must be the command directory.
         : see `^^working directory$` @ `^^shell commands$` @
           http://reluk.ca/project/Java/action_plan.brec
