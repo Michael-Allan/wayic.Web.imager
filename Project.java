@@ -12,7 +12,7 @@ final class Project {
 
 
 
-    /** The logger proper to this project.
+    /** The logger proper to the present project.
       */
     static final Logger logger = Logger.getLogger( "wayic.Web.imager" ); }
 
