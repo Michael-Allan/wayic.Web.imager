@@ -10,7 +10,8 @@ import wayic.Waybrec.parser.WaybrecXCursor;
 import static Breccia.parser.BrecciaXCursor.EMPTY;
 import static Breccia.parser.BrecciaXCursor.START_DOCUMENT;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static java.util.logging.Level.FINE;
+import static java.nio.file.Files.createFile;
+import static java.nio.file.Files.newInputStream;
 import static wayic.Web.imager.Project.logger;
 
 
@@ -27,22 +28,22 @@ public final class WaybrecHTMLTransformer implements FileTransformer {
    // ━━━  F i l e   T r a n s f o r m e r  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-    public @Override void transform( Path sourceFile ) throws IOException {
+    public @Override void transform( final Path sourceFile, final Path imageDirectory )
+          throws IOException {
         if( !isWaycastFile( sourceFile )) {
-            plainTransformer.transform( sourceFile );
+            plainTransformer.transform( sourceFile, imageDirectory );
             return; }
         // TODO below, share common code with `Breccia.Web.imager.BrecciaHTMLTransformer`.
-        try( final InputStream byteSource = Files.newInputStream​( sourceFile );
+        try( final InputStream byteSource = newInputStream​( sourceFile );
              final InputStreamReader charSource = new InputStreamReader( byteSource, UTF_8 )) {
                // Cursor `in` does the buffering of `charSource` recommended by `InputStreamReader`.
                // The underlying `byteSource` needs none.  https://stackoverflow.com/a/27347262/2402790
             in.markupSource( charSource );
             final int t = in.getEventType();
             if( t == EMPTY ) {
-                logger.log( FINE, "Imaging empty source file: {0}", sourceFile );
-                final Path imageFile = sourceFile.resolveSibling( sourceFile.getFileName() + ".xht" );
-                Files.deleteIfExists( imageFile );
-                Files.createFile( imageFile );
+                logger.fine( () -> "Imaging empty source file: " + sourceFile );
+                final Path imageFile = imageDirectory.resolve( sourceFile.getFileName() + ".xht" );
+                createFile( imageFile );
                 return; }
             assert t == START_DOCUMENT;
             for( ;; ) {
@@ -55,7 +56,7 @@ public final class WaybrecHTMLTransformer implements FileTransformer {
 ////  P r i v a t e  ////////////////////////////////////////////////////////////////////////////////////
 
 
-    /** Answers whether `f` is contained in a waycast.
+    /** Tells whether `f` is contained in a waycast.
       */
     private static boolean isWaycastFile( final Path f ) { return false; } // Yet unimplemented.
 
