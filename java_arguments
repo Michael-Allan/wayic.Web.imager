@@ -3,7 +3,7 @@
 # This is a `java` command-line argument file; a referent of the files under `./bin/`.  For syntax:
 # `https://docs.oracle.com/en/java/javase/15/docs/specs/man/java.html#java-command-line-argument-files`.
 
-   --class-path /tmp/building/Makeshift/
+   --class-path /tmp/building.Makeshift/
     -enableassertions:wayic.Web.imager...
    --enable-preview # Q.v. in `http://reluk.ca/project/Breccia/Web/imager/Builder.java`.
       # Any actual use of a preview feature results in a warning visible to the user
