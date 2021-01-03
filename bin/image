@@ -3,15 +3,14 @@ package wayic.Web.imager; // [AFN]
 
 // This command runs directly from the present source file, it needs no compiling.
 
-import Breccia.Web.imager.BrecciaHTMLTransformer;
-import Breccia.Web.imager.ImageMould;
+import Breccia.Web.imager.*;
 import java.io.IOException;
 import java.nio.file.Path;
-import Java.UserError;
+import Java.Unhandled;
 
 import static Java.Files.emptyDirectory;
 import static java.nio.file.Files.createDirectories;
-import static Breccia.Web.imager.Project.placeImageFiles;
+import static wayic.Web.imager.Project.outDirectory;
 
 
 /** A shell command to make a Web image.
@@ -19,7 +18,6 @@ import static Breccia.Web.imager.Project.placeImageFiles;
   *     @see <a href='http://reluk.ca/project/wayic/Web/imager/bin/image.brec'>The `image` command</a>
   */
 public final class ImageCommand { // [AFN]
-
 
 
     private ImageCommand( final Path boundaryPath ) { this.boundaryPath = boundaryPath; }
@@ -54,22 +52,12 @@ public final class ImageCommand { // [AFN]
       *     @return True on success, false on failure.
       */
     private boolean execute() {
-        boolean hasFailed = false;
-        try {
-            final var out = emptyDirectory( createDirectories(
-              Project.outDirectory.resolve( Path.of( "mould" ))));
-            final ImageMould mould; {
-                final var t = new WaybrecHTMLTransformer( new BrecciaHTMLTransformer() );
-                mould = new ImageMould( boundaryPath, t, out ); }
-            try { mould.formImage(); }
-            catch( final UserError x ) {
-                System.err.println( "image: " + x.getMessage() );
-                hasFailed = true; }
-            placeImageFiles( /*from*/out, /*to*/mould.boundaryPathDirectory ); }
-        catch( final IOException x ) {
-            System.err.println( "image: " + x );
-            hasFailed = true; }
-        return !hasFailed; }}
+        final Path out;
+        try { out = emptyDirectory( createDirectories( outDirectory.resolve( Path.of( "mould" )))); }
+        catch( IOException x ) { throw new Unhandled( x ); } // Unexpected for `outDirectory`.
+        final var t = new WaybrecHTMLTransformer( new BrecciaHTMLTransformer() );
+        final ImageMould mould = new ImageMould( boundaryPath, t, out );
+        return Imaging.image( mould ); }}
 
 
 
@@ -87,4 +75,4 @@ public final class ImageCommand { // [AFN]
 
 
 
-                                                        // Copyright © 2020  Michael Allan.  Licence MIT.
+                                                   // Copyright © 2020-2021  Michael Allan.  Licence MIT.
