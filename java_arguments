@@ -4,7 +4,7 @@
 # `https://docs.oracle.com/en/java/javase/15/docs/specs/man/java.html#java-command-line-argument-files`.
 
    --class-path /tmp/building.Makeshift/
-    -enableassertions:wayic.Web.imager...
+    -enableassertions
    --enable-preview # Q.v. in `http://reluk.ca/project/Breccia/Web/imager/Builder.java`.
       # Any actual use of a preview feature results in a warning visible to the user
       # which (in most cases) cannot be suppressed.  https://openjdk.java.net/jeps/12
