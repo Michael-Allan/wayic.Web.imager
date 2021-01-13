@@ -1,9 +1,11 @@
 package wayic.Web.imager;
 
+import Breccia.parser.ParseError;
 import Breccia.Web.imager.FileTransformer;
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
+import Java.Unhandled;
+import javax.xml.stream.XMLStreamException;
 import wayic.Waybrec.parser.WaybrecCursor;
 import wayic.Waybrec.parser.WaybrecXCursor;
 
@@ -29,7 +31,7 @@ public final class WaybrecHTMLTransformer implements FileTransformer {
 
 
     public @Override void transform( final Path sourceFile, final Path imageDirectory )
-          throws IOException {
+          throws IOException, ParseError {
         if( !isWaycastFile( sourceFile )) {
             plainTransformer.transform( sourceFile, imageDirectory );
             return; }
@@ -48,8 +50,12 @@ public final class WaybrecHTMLTransformer implements FileTransformer {
             assert t == START_DOCUMENT;
             for( ;; ) {
                 // TODO, the actual transform.
-                if( in.hasNext() ) in.next();
-                else break; }}}
+                if( !in.hasNext() ) break;
+                try { in.next(); }
+                catch( final XMLStreamException x ) {
+                    final var cause = x.getCause();
+                    if( cause instanceof ParseError ) throw (ParseError)cause;
+                    throw new Unhandled( x ); }}}}
 
 
 
@@ -70,4 +76,4 @@ public final class WaybrecHTMLTransformer implements FileTransformer {
 
 
 
-                                                        // Copyright © 2020  Michael Allan.  Licence MIT.
+                                                   // Copyright © 2020-2021  Michael Allan.  Licence MIT.
