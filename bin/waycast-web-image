@@ -15,26 +15,27 @@ import static wayic.Web.imager.Project.outDirectory;
 
 /** A shell command to make a Web image.
   *
-  *     @see <a href='http://reluk.ca/project/wayic/Web/imager/bin/image.brec'>The `image` command</a>
+  *     @see <a href='http://reluk.ca/project/wayic/Web/imager/bin/waycast-web-image.brec'>
+  *       The `waycast-web-image` command</a>
   */
-public final class ImageCommand { // [AFN]
+public final class WaycastWebImageCommand { // [AFN]
 
 
-    private ImageCommand( final Path boundaryPath ) { this.boundaryPath = boundaryPath; }
+    private WaycastWebImageCommand( final Path boundaryPath ) { this.boundaryPath = boundaryPath; }
 
 
 
-    /** Takes an `image` command from the shell and executes it.
+    /** Takes a `waycast-web-image` command from the shell and executes it.
       */
     public static void main( final String[] arguments ) {
         final boolean hasFailed;
         final String argument;
         if( arguments.length == 1
          && !(argument = arguments[0]).startsWith( "-" )) { // Allowing e.g. for a deliberate `-?`.
-            final var command = new ImageCommand( Path.of( argument ));
+            final var command = new WaycastWebImageCommand( Path.of( argument ));
             hasFailed = !command.execute(); }
         else {
-            System.err.println( "Usage: image <boundary path>" );
+            System.err.println( "Usage: waycast-web-image <boundary path>" );
             hasFailed = true; }
         if( hasFailed ) System.exit( 1 ); }
 

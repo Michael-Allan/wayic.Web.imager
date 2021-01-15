@@ -18,9 +18,9 @@ Installation instructions for the waycast Web imager
         3+ Build the software.
             : join @ http://reluk.ca/project/Breccia/Web/imager/project_installation.brec
             >+ build wayic/Web/imager class-files
-        4+ Test your access to the `image` command.
-            >+ wayic/Web/imager/bin/image -?
-                / ⇒  Usage: image <path>...
+        4+ Test your access to the `waycast-web-image` command.
+            >+ wayic/Web/imager/bin/waycast-web-image -?
+                / ⇒  Usage: waycast-web-image <path>...
 
     Web publication
         • Breccian files
