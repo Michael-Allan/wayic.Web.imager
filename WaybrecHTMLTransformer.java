@@ -62,7 +62,7 @@ public final class WaybrecHTMLTransformer implements FileTransformer {
 ////  P r i v a t e  ////////////////////////////////////////////////////////////////////////////////////
 
 
-    /** Tells whether `f` is contained in a waycast.
+    /** Whether `f` is contained in a waycast.
       */
     private static boolean isWaycastFile( final Path f ) { return false; } // Yet unimplemented.
 
