@@ -42,11 +42,11 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
    // ━━━  F i l e   T r a n s f o r m e r  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-    public @Override Markup formalReferenceAt( final WaybrecCursor sourceCursor ) {
-        Markup markup = plainTransformer.formalReferenceAt( sourceCursor );
-        if( markup == null ) {
+    public @Override FractalDetail formalReferenceAt( final WaybrecCursor sourceCursor ) {
+        FractalDetail detail = plainTransformer.formalReferenceAt( sourceCursor );
+        if( detail == null ) {
             /* TODO, the Waybreccian part */; }
-        return markup; }
+        return detail; }
 
 
 
