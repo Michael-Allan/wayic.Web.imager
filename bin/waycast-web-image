@@ -37,7 +37,7 @@ public final class WaycastWebImageCommand { // [AFN]
         if( arguments.length == 1
          && !(argument = arguments[0]).startsWith( "-" )) { // Allowing e.g. for a deliberate `-?`.
             final var command = new WaycastWebImageCommand( Path.of( argument ));
-            hasFailed = !command.execute(); }
+            hasFailed = !command.run(); }
         else {
             System.err.println( "Usage: waycast-web-image <boundary path>" );
             hasFailed = true; }
@@ -52,11 +52,9 @@ public final class WaycastWebImageCommand { // [AFN]
 
 
 
-    /** Executes the command.
-      *
-      *     @return True on success, false on failure.
+    /** @return True on success, false on failure.
       */
-    private boolean execute() {
+    private boolean run() {
         final BrecciaHTMLTransformer tB =
           new BrecciaHTMLTransformer( new BrecciaXCursor( new BrecciaCursor() ));
         final WaybrecHTMLTransformer t =
