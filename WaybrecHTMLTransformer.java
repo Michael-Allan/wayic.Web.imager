@@ -3,6 +3,7 @@ package wayic.Web.imager;
 import Breccia.parser.*;
 import Breccia.Web.imager.FileTransformer;
 import Breccia.Web.imager.TransformError;
+import Breccia.XML.translator.BrecciaXCursor;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URI;
@@ -10,11 +11,10 @@ import java.nio.file.Path;
 import Java.Unhandled;
 import javax.xml.stream.XMLStreamException;
 import wayic.Waybrec.parser.WaybrecCursor;
-import wayic.Waybrec.parser.WaybrecXCursor;
 
-import static Breccia.parser.BrecciaXCursor.EMPTY;
 import static Breccia.parser.Project.newSourceReader;
 import static Breccia.Web.imager.Imaging.imageSimpleName;
+import static Breccia.XML.translator.BrecciaXCursor.EMPTY;
 import static java.nio.file.Files.createFile;
 import static wayic.Web.imager.Project.logger;
 
@@ -22,12 +22,14 @@ import static wayic.Web.imager.Project.logger;
 public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCursor> {
 
 
-    /** @see #inX
+    /** @see #sourceCursor
+      * @see #sourceTranslator
       * @param plainTransformer The transformer to use for non-waycast files.
       */
-    public WaybrecHTMLTransformer( WaybrecXCursor inX,
+    public WaybrecHTMLTransformer( WaybrecCursor sourceCursor, BrecciaXCursor sourceTranslator,
           FileTransformer<BrecciaCursor> plainTransformer ) {
-        this.inX = inX;
+        this.sourceCursor = sourceCursor;
+        this.sourceTranslator = sourceTranslator;
         this.plainTransformer = plainTransformer; }
 
 
@@ -35,7 +37,7 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
     /** The source translator to use during calls to this transformer for waycast files.
       * Between calls, it may be used for other purposes.
       */
-    public final WaybrecXCursor inX;
+    public final BrecciaXCursor sourceTranslator;
 
 
 
@@ -50,7 +52,7 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
 
 
 
-    public @Override WaybrecCursor sourceCursor() { return inX.sourceCursor(); }
+    public @Override WaybrecCursor sourceCursor() { return sourceCursor; }
 
 
 
@@ -61,6 +63,7 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
             return; }
         // TODO below, share common code with `Breccia.Web.imager.BrecciaHTMLTransformer`.
         try( final Reader source = newSourceReader​( sourceFile )) {
+            final BrecciaXCursor inX = sourceTranslator;
             inX.markupSource( source ); /* Better not to parse functionally using `inX.perState`
               and mess with shipping a checked `TransformError` out of the lambda function. */
             for( ;; ) {
@@ -86,7 +89,11 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
 
 
 
-    private final FileTransformer<BrecciaCursor> plainTransformer; }
+    private final FileTransformer<BrecciaCursor> plainTransformer;
+
+
+
+    private final WaybrecCursor sourceCursor; }
 
 
 

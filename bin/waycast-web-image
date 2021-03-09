@@ -4,13 +4,12 @@ package wayic.Web.imager; // [AFN]
 // This command runs directly from the present source file, it needs no compiling.
 
 import Breccia.parser.BrecciaCursor;
-import Breccia.parser.BrecciaXCursor;
 import Breccia.Web.imager.*;
+import Breccia.XML.translator.BrecciaXCursor;
 import java.io.IOException;
 import java.nio.file.Path;
 import Java.Unhandled;
 import wayic.Waybrec.parser.WaybrecCursor;
-import wayic.Waybrec.parser.WaybrecXCursor;
 
 import static Java.Files.emptyDirectory;
 import static java.nio.file.Files.createDirectories;
@@ -55,10 +54,10 @@ public final class WaycastWebImageCommand { // [AFN]
     /** @return True on success, false on failure.
       */
     private boolean run() {
-        final BrecciaHTMLTransformer tB =
-          new BrecciaHTMLTransformer( new BrecciaXCursor( new BrecciaCursor() ));
-        final WaybrecHTMLTransformer t =
-          new WaybrecHTMLTransformer( new WaybrecXCursor( new WaybrecCursor() ), tB );
+        final BrecciaCursor cB = new BrecciaCursor();
+        final WaybrecCursor cW = new WaybrecCursor();
+        final BrecciaHTMLTransformer tB = new BrecciaHTMLTransformer( cB, new BrecciaXCursor( cB ));
+        final WaybrecHTMLTransformer t  = new WaybrecHTMLTransformer( cW, new BrecciaXCursor( cW ), tB );
         final Path out;
         try { out = emptyDirectory( createDirectories( outDirectory.resolve( Path.of( "mould" )))); }
         catch( IOException x ) { throw new Unhandled( x ); } // Unexpected for `outDirectory`.
