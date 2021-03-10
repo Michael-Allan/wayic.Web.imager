@@ -54,13 +54,11 @@ public final class WaycastWebImageCommand { // [AFN]
     /** @return True on success, false on failure.
       */
     private boolean run() {
-        final BrecciaCursor cB = new BrecciaCursor();
-        final WaybrecCursor cW = new WaybrecCursor();
-        final BrecciaHTMLTransformer tB = new BrecciaHTMLTransformer( cB, new BrecciaXCursor( cB ));
-        final WaybrecHTMLTransformer t  = new WaybrecHTMLTransformer( cW, new BrecciaXCursor( cW ), tB );
         final Path out;
         try { out = emptyDirectory( createDirectories( outDirectory.resolve( Path.of( "mould" )))); }
         catch( IOException x ) { throw new Unhandled( x ); } // Unexpected for `outDirectory`.
+        final var tB = new BrecciaHTMLTransformer( new BrecciaCursor(), new BrecciaXCursor() );
+        final var t  = new WaybrecHTMLTransformer( new WaybrecCursor(), new BrecciaXCursor(), tB );
         return Imaging.image( "waycast-web-image", boundaryPath, t, out ); }}
 
 
