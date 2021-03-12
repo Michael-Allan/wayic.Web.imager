@@ -12,7 +12,7 @@ import Java.Unhandled;
 import javax.xml.stream.XMLStreamException;
 import wayic.Waybrec.parser.WaybrecCursor;
 
-import static Breccia.parser.Project.newSourceReader;
+import static Breccia.parser.plain.Project.newSourceReader;
 import static Breccia.Web.imager.Imaging.imageSimpleName;
 import static Breccia.XML.translator.BrecciaXCursor.EMPTY;
 import static java.nio.file.Files.createFile;
@@ -27,7 +27,7 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
       * @param plainTransformer The transformer to use for non-waycast files.
       */
     public WaybrecHTMLTransformer( WaybrecCursor sourceCursor, BrecciaXCursor sourceTranslator,
-          FileTransformer<BrecciaCursor> plainTransformer ) {
+          FileTransformer<FileCursor> plainTransformer ) {
         this.sourceCursor = sourceCursor;
         this.sourceTranslator = sourceTranslator;
         this.plainTransformer = plainTransformer; }
@@ -44,10 +44,10 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
    // ━━━  F i l e   T r a n s f o r m e r  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-    public @Override FlatMarkup formalReferenceAt( final WaybrecCursor sourceCursor ) {
-        FlatMarkup ref = plainTransformer.formalReferenceAt( sourceCursor );
+    public @Override Markup formalReferenceAt( final WaybrecCursor sourceCursor ) {
+        Markup ref = plainTransformer.formalReferenceAt( sourceCursor );
         if( ref == null ) {
-            /* TODO, the Waybreccian part */; }
+            /* TODO, any Waybreccian part */; }
         return ref; }
 
 
@@ -61,7 +61,7 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
         if( !isWaycastFile( sourceFile )) {
             plainTransformer.transform( sourceFile, imageDirectory );
             return; }
-        // TODO below, share common code with `Breccia.Web.imager.BrecciaHTMLTransformer`.
+        // TODO below, reuse code of `Breccia.Web.imager.BrecciaHTMLTransformer` where common.
         try( final Reader sourceReader = newSourceReader​( sourceFile )) {
             sourceCursor.markupSource( sourceReader );
             sourceTranslator.markupSource( sourceCursor ); /* Better not to parse functionally using its
@@ -89,7 +89,7 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
 
 
 
-    private final FileTransformer<BrecciaCursor> plainTransformer;
+    private final FileTransformer<FileCursor> plainTransformer;
 
 
 
