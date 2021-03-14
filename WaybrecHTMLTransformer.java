@@ -27,7 +27,7 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
       * @param plainTransformer The transformer to use for non-waycast files.
       */
     public WaybrecHTMLTransformer( WaybrecCursor sourceCursor, BrecciaXCursor sourceTranslator,
-          FileTransformer<FileCursor> plainTransformer ) {
+          FileTransformer<ReusableCursor> plainTransformer ) {
         this.sourceCursor = sourceCursor;
         this.sourceTranslator = sourceTranslator;
         this.plainTransformer = plainTransformer; }
@@ -89,7 +89,7 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
 
 
 
-    private final FileTransformer<FileCursor> plainTransformer;
+    private final FileTransformer<ReusableCursor> plainTransformer;
 
 
 
