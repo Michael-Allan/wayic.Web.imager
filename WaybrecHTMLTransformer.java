@@ -44,7 +44,7 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
    // ━━━  F i l e   T r a n s f o r m e r  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-    public @Override Markup formalReferenceAt( final WaybrecCursor sourceCursor ) {
+    public @Override Markup formalReferenceAt( final WaybrecCursor sourceCursor ) throws ParseError {
         Markup ref = plainTransformer.formalReferenceAt( sourceCursor );
         if( ref == null ) {
             /* TODO, any Waybreccian part */; }
