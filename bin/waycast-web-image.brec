@@ -5,13 +5,15 @@
     - The `waycast-web-image` command makes a Web image delimited by the given boundary path,
       which is the path of a single file or directory.
         - It ensures that each Breccian source file stored at or under the boundary path
-          is accompanied by its image, a sibling namesake with a `.xht` extension.
-        - It ensures that any waycast stored at or under the boundary path is properly imaged.
-        - It reforms any image file that does not postdate both its source
-          and all Breccian referents of its source.
+          is accompanied by its image file, a sibling namesake with a `.xht` extension.
+        - It ensures that any waycast stored at or under the boundary path is properly imaged as such.
+        - It reforms any image file that does not postdate both its source file
+          and all formal resources of its source.
+            : re `formal resources` see non-fractal `formalResources` @
+              http://reluk.ca/project/Breccia/Web/imager/ExternalResources.java :
+              Typically these are Breccian referent files.
     - The working directory must be the command directory.
-        : see `^^working directory$` @ `^^shell commands$` @
-          http://reluk.ca/project/Java/notepad.brec
+        : see `^^working directory$` @ `^^shell commands$` @ http://reluk.ca/project/Java/notepad.brec
 
 
     ━━━━━━━━━━
@@ -23,4 +25,4 @@
 
 
 
-                                                    \ Copyright © 2020-2021  Michael Allan.  Licence MIT.
+                                                    \ Copyright © 2020-2022  Michael Allan.  Licence MIT.
