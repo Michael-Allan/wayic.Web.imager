@@ -16,7 +16,7 @@ public enum BuildTarget {
 
     /** Java class files compiled from source code.
       */
-    Java_class_files; }
+    Java_class_files }
 
 
 
