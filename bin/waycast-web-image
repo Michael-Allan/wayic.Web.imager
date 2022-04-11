@@ -57,9 +57,10 @@ public final class WaycastWebImageCommand { // [AFN]
         final Path out;
         try { out = emptyDirectory( createDirectories( outDirectory.resolve( Path.of( "mould" )))); }
         catch( IOException x ) { throw new Unhandled( x ); } // Unexpected for `outDirectory`.
-        final var tB = new BrecciaHTMLTransformer( new BrecciaCursor(), new BrecciaXCursor() );
-        final var t  = new WaybrecHTMLTransformer( new WaybrecCursor(), new BrecciaXCursor(), tB );
-        return Imaging.image( "waycast-web-image", boundaryPath, t, out ); }}
+        try( final BrecciaXCursor sourceTranslator = new BrecciaXCursor() ) {
+            final var tB = new BrecciaHTMLTransformer( new BrecciaCursor(), sourceTranslator );
+            final var t  = new WaybrecHTMLTransformer( new WaybrecCursor(), sourceTranslator, tB );
+            return Imaging.image( "waycast-web-image", boundaryPath, t, out ); }}}
 
 
 
@@ -77,4 +78,4 @@ public final class WaycastWebImageCommand { // [AFN]
 
 
 
-                                                   // Copyright © 2020-2021  Michael Allan.  Licence MIT.
+                                                   // Copyright © 2020-2022  Michael Allan.  Licence MIT.

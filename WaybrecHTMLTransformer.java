@@ -25,6 +25,7 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
     /** @see #sourceCursor
       * @see #sourceTranslator
       * @param plainTransformer The transformer to use for non-waycast files.
+      *   It may share the {@linkplain #sourceTranslator same source translator}.
       */
     public WaybrecHTMLTransformer( WaybrecCursor sourceCursor, BrecciaXCursor sourceTranslator,
           FileTransformer<ReusableCursor> plainTransformer ) {
@@ -97,4 +98,4 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
 
 
 
-                                                   // Copyright © 2020-2021  Michael Allan.  Licence MIT.
+                                                   // Copyright © 2020-2022  Michael Allan.  Licence MIT.
