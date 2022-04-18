@@ -9,7 +9,7 @@ Installation instructions for the waycast Web imager
             • Waybrec Parser
                 : see http://reluk.ca/project/wayic/Waybrec/parser/
         2+ Install the files of the present project.
-            >+ cd <command-directory>/
+            >+ cd <command directory>/
                 / The command directory is where project installations are accessible by their
                   proper paths.  The present project, for example, will shortly be accessible
                   at `wayic/Web/imager`.
