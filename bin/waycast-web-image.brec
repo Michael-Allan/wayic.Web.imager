@@ -1,19 +1,47 @@
 `waycast-web-image` - Make a Web image
 
-        waycast-web-image <boundary path>
+        waycast-web-image  [<options>]  <boundary path>
+        waycast-web-image  --help | -?
 
     - The `waycast-web-image` command makes a Web image delimited by the given boundary path,
       which is the path of a single file or directory.
         - It ensures that each Breccian source file stored at or under the boundary path
           is accompanied by its image file, a sibling namesake with a `.xht` extension.
         - It ensures that any waycast stored at or under the boundary path is properly imaged as such.
-        - It reforms any image file that does not postdate both its source file
-          and all formal resources of its source.
-            : re `formal resources` see non-fractal `formalResources` @
-              http://reluk.ca/project/Breccia/Web/imager/ExternalResources.java :
-              Typically these are Breccian referent files.
-    - The working directory must be the command directory.
-        : see `^^working directory$` @ `^^shell commands$` @ http://reluk.ca/project/Java/notepad.brec
+        - Any image file that is missing is formed anew, any that is outdated is reformed.
+            - An image file is outdated unless it postdates both its source file
+              and all formal resources of the source file.
+                : re `formal resources` see non-fractal `formalResources` @
+                  http://reluk.ca/project/Breccia/Web/imager/ExternalResources.java :
+                  Typically these are Breccian referent files.
+        - The working directory must be the command directory.
+            : see `^^working directory$` @ `^^shell commands$` @
+              http://reluk.ca/project/Java/notepad.brec
+    - One positional argument is required:
+
+        <boundary path>
+            / The path of a file or directory.
+            - Sets the bounds of the Web image: each Breccian source file stored at or under this path
+              is made eligible for imaging.
+
+    - The positional argument may be preceded by one or more nominal arguments, aka options:
+
+        --style-sheet: --style-sheet=<URI reference>
+                : re `URI reference` see https://tools.ietf.org/html/rfc3986#section-4.1
+            - Writes into each image file the given URI reference,
+              making its referent the basic style sheet for the image.
+            - The default value is `http://reluk.ca/project/Breccia/Web/imager/image.css`.
+                / Do not rely on it, however, because its content may postdate your installation
+                  and lead to mistyling.
+        --style-sheet-intracast: --style-sheet-intracast=<URI reference>
+                : re `URI reference` see https://tools.ietf.org/html/rfc3986#section-4.1
+            - Writes into each intracast image file the given URI reference,
+              making its referent an adjunct style sheet for the intracast parts of the image,
+              additional to the basic style sheet.
+                : re `basic style sheet` see `^^--style-sheet:` @ `nominal arguments:$`
+            - The default value is `http://reluk.ca/project/wayic/Web/imager/intracast_adjunct.css`.
+                / Do not rely on it, however, because its content may postdate your installation
+                  and lead to mistyling.
 
 
     ━━━━━━━━━━

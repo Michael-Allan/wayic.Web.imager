@@ -1,44 +1,35 @@
 package wayic.Web.imager;
 
 import Breccia.parser.*;
-import Breccia.Web.imager.FileTransformer;
-import Breccia.Web.imager.TransformError;
+import Breccia.Web.imager.*;
 import Breccia.XML.translator.BrecciaXCursor;
-import java.io.IOException;
-import java.io.Reader;
-import java.net.URI;
 import java.nio.file.Path;
-import Java.Unhandled;
-import javax.xml.stream.XMLStreamException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import wayic.Waybrec.parser.WaybrecCursor;
 
-import static Breccia.parser.plain.Project.newSourceReader;
-import static Breccia.Web.imager.Imaging.imageSimpleName;
-import static Breccia.XML.translator.BrecciaXCursor.EMPTY;
-import static java.nio.file.Files.createFile;
-import static wayic.Web.imager.Project.logger;
+import static java.nio.file.Files.exists;
+import static java.nio.file.Files.isDirectory;
 
 
-public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCursor> {
+public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<WaybrecCursor> {
 
 
     /** @see #sourceCursor
       * @see #sourceTranslator
-      * @param plainTransformer The transformer to use for non-waycast files.
+      * @see #styleSheet
+      * @see #styleSheetIntracast
+      * @param extracastTransformer The transformer to use for extracast source files.
       *   It may share the {@linkplain #sourceTranslator same source translator}.
+      *   All other (namely intracast) source files will use the present transformer.
       */
     public WaybrecHTMLTransformer( WaybrecCursor sourceCursor, BrecciaXCursor sourceTranslator,
-          FileTransformer<ReusableCursor> plainTransformer ) {
-        this.sourceCursor = sourceCursor;
-        this.sourceTranslator = sourceTranslator;
-        this.plainTransformer = plainTransformer; }
-
-
-
-    /** The source translator to use during calls to this transformer for waycast files.
-      * Between calls, it may be used for other purposes.
-      */
-    public final BrecciaXCursor sourceTranslator;
+          String styleSheet, String styleSheetIntracast,
+          FileTransformer<? extends ReusableCursor> extracastTransformer ) {
+        super( sourceCursor, sourceTranslator, styleSheet );
+        this.extracastTransformer = extracastTransformer;
+        this.styleSheetIntracast = styleSheetIntracast; }
 
 
 
@@ -46,55 +37,68 @@ public final class WaybrecHTMLTransformer implements FileTransformer<WaybrecCurs
 
 
     public @Override Markup formalReferenceAt( final WaybrecCursor sourceCursor ) throws ParseError {
-        Markup ref = plainTransformer.formalReferenceAt( sourceCursor );
+        Markup ref = super.formalReferenceAt( sourceCursor );
         if( ref == null ) {
             /* TODO, any Waybreccian part */; }
         return ref; }
 
 
 
-    public @Override WaybrecCursor sourceCursor() { return sourceCursor; }
-
-
-
     public @Override void transform( final Path sourceFile, final Path imageDirectory )
           throws ParseError, TransformError {
-        if( !isWaycastFile( sourceFile )) {
-            plainTransformer.transform( sourceFile, imageDirectory );
+        if( !isIntracast( sourceFile )) {
+            extracastTransformer.transform( sourceFile, imageDirectory );
             return; }
-        // TODO below, reuse code of `Breccia.Web.imager.BrecciaHTMLTransformer` where common.
-        try( final Reader sourceReader = newSourceReader​( sourceFile )) {
-            sourceCursor.markupSource( sourceReader );
-            sourceTranslator.markupSource( sourceCursor ); /* Better not to parse functionally using its
-              `perState` and mess with shipping a checked `TransformError` out of the lambda function. */
-            for( final BrecciaXCursor inX = sourceTranslator;; ) {
-                switch( inX.getEventType() ) {
-                    case EMPTY -> {
-                        logger.fine( () -> "Imaging empty source file: " + sourceFile );
-                        final Path imageFile = imageDirectory.resolve( imageSimpleName( sourceFile ));
-                        createFile( imageFile ); }}
-                    // TODO, the actual transform for other states.
-                if( !inX.hasNext() ) break;
-                try { inX.next(); }
-                catch( final XMLStreamException x ) { throw (ParseError)(x.getCause()); }}}
-        catch( IOException x ) { throw new Unhandled( x ); }}
+        super.transform( sourceFile, imageDirectory ); }
 
 
 
 ////  P r i v a t e  ////////////////////////////////////////////////////////////////////////////////////
 
 
-    /** Whether `f` is contained in a waycast.
+    private final FileTransformer<? extends ReusableCursor> extracastTransformer;
+
+
+
+    /** Whether `p` is contained in a waycast.
       */
-    private static boolean isWaycastFile( final Path f ) { return false; } // Yet unimplemented.
+    private static boolean isIntracast( Path p ) {
+        while( (p = p.getParent()) != null ) {
+            if( waycastDirectoryName.equals( p.getFileName() )) {
+                final Path s = p.resolve( signatureWayFile );
+                if( exists(s) && !isDirectory(s) ) return true; }}
+        return false; }
 
 
 
-    private final FileTransformer<ReusableCursor> plainTransformer;
+    private static final Path signatureWayFile = Path.of( "way.brec" );
 
 
 
-    private final WaybrecCursor sourceCursor; }
+    /** The location of the adjunct style sheet for the intracast parts of the Web image,
+      * formally a URI reference.  It will be written verbatim into each intracast image file.
+      *
+      *     @see <a href='https://tools.ietf.org/html/rfc3986#section-4.1'>URI reference</a>
+      */
+    private final String styleSheetIntracast;
+
+
+
+    private static final Path waycastDirectoryName = Path.of( "waycast" );
+
+
+
+   // ━━━  B r e c c i a   H T M L   T r a n s f o r m e r  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+    protected @Override void transform( final Document d ) {
+        super.transform( d );
+        final Node head = d.getFirstChild()/*html*/.getFirstChild();
+        assert "head".equals( head.getLocalName() );
+        Element e;
+        head.appendChild( e = d.createElement( "link" ));
+        e.setAttribute( "rel", "stylesheet" );
+        e.setAttribute( "href", styleSheetIntracast ); }}
 
 
 

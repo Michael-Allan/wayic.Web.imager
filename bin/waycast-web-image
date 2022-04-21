@@ -12,7 +12,10 @@ import Java.Unhandled;
 import wayic.Waybrec.parser.WaybrecCursor;
 
 import static Java.Files.emptyDirectory;
+import static java.lang.System.err;
+import static java.lang.System.exit;
 import static java.nio.file.Files.createDirectories;
+import static java.nio.file.Files.exists;
 import static wayic.Web.imager.Project.outDirectory;
 
 
@@ -31,16 +34,25 @@ public final class WaycastWebImageCommand { // [AFN]
     /** Takes a `waycast-web-image` command from the shell and executes it.
       */
     public static void main( final String[] arguments ) {
-        final boolean hasFailed;
-        final String argument;
-        if( arguments.length == 1
-         && !(argument = arguments[0]).startsWith( "-" )) { // Allowing e.g. for a deliberate `-?`.
-            final var command = new WaycastWebImageCommand( Path.of( argument ));
-            hasFailed = !command.run(); }
-        else {
-            System.err.println( "Usage: waycast-web-image <boundary path>" );
-            hasFailed = true; }
-        if( hasFailed ) System.exit( 1 ); }
+        final int p; { // Expected start of positional arguments.
+            final int aN = arguments.length;
+            if( aN == 1 ) exitOnDemand( arguments[0] );
+            p = aN - 1;
+            if( p < 0 ) {
+                err.println( "waycast-web-image: Too few arguments: " + aN );
+                exitWithUsage( 1 ); }}
+        final var command = new WaycastWebImageCommand( Path.of(arguments[p]).toAbsolutePath() );
+        for( int a = 0; a < p/*argument is nominal, aka an option*/; ++a ) {
+            final String arg = arguments[a];
+            exitOnDemand( arg );
+            String s;
+            if( arg.startsWith( s = "--style-sheet=" )) command.styleSheet = arg.substring( s.length() );
+            else if( arg.startsWith( s = "--style-sheet-intracast=" )) {
+                command.styleSheetIntracast = arg.substring( s.length() ); }
+            else {
+                err.println( "waycast-web-image: Unrecognized argument: " + arg );
+                exit( 1 ); }}
+        if( !command.run() ) exit( 1 ); }
 
 
 
@@ -51,16 +63,44 @@ public final class WaycastWebImageCommand { // [AFN]
 
 
 
+    private static void exitOnDemand( final String arg ) {
+        if( arg.equals("-?") || arg.equals("--help") ) exitWithUsage( 0 ); }
+
+
+
+    private static void exitWithUsage( final int status ) {
+        err.println( "Usage: waycast-web-image [<options>] <boundary path>" );
+        err.println( "       waycast-web-image --help | -?" );
+        err.println( "Options, one or more of:" );
+        err.println( "    --style-sheet=<URI reference>" );
+        err.println( "    --style-sheet-intracast=<URI reference>" );
+        exit( status ); }
+
+
+
     /** @return True on success, false on failure.
       */
     private boolean run() {
+        if( !exists( boundaryPath )) {
+            err.println( "waycast-web-image: No such file or directory: " + boundaryPath );
+            return false; }
         final Path out;
         try { out = emptyDirectory( createDirectories( outDirectory.resolve( Path.of( "mould" )))); }
         catch( IOException x ) { throw new Unhandled( x ); } // Unexpected for `outDirectory`.
         try( final BrecciaXCursor sourceTranslator = new BrecciaXCursor() ) {
-            final var tB = new BrecciaHTMLTransformer( new BrecciaCursor(), sourceTranslator );
-            final var t  = new WaybrecHTMLTransformer( new WaybrecCursor(), sourceTranslator, tB );
-            return Imaging.image( "waycast-web-image", boundaryPath, t, out ); }}}
+            final var t = new BrecciaHTMLTransformer<>(
+              new BrecciaCursor(), sourceTranslator, styleSheet );
+            final var tW = new WaybrecHTMLTransformer(
+              new WaybrecCursor(), sourceTranslator, styleSheet, styleSheetIntracast, t );
+            return Imaging.image( "waycast-web-image", boundaryPath, tW, out ); }}
+
+
+
+    String styleSheet = "http://reluk.ca/project/Breccia/Web/imager/image.css";
+
+
+
+    String styleSheetIntracast = "http://reluk.ca/project/wayic/Web/imager/intracast_adjunct.css"; }
 
 
 
