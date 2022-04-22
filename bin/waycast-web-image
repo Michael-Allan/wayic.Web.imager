@@ -9,6 +9,8 @@ import Breccia.XML.translator.BrecciaXCursor;
 import java.io.IOException;
 import java.nio.file.Path;
 import Java.Unhandled;
+import java.util.ArrayList;
+import java.util.List;
 import wayic.Waybrec.parser.WaybrecCursor;
 
 import static Java.Files.emptyDirectory;
@@ -27,31 +29,38 @@ import static wayic.Web.imager.Project.outDirectory;
 public final class WaycastWebImageCommand { // [AFN]
 
 
-    private WaycastWebImageCommand( final Path boundaryPath ) { this.boundaryPath = boundaryPath; }
+    /** @param argsO Nominal arguments, aka options.
+      * @param argsP Positional arguments.
+      */
+    private WaycastWebImageCommand( final  List<String> argsO, final List<String> argsP ) {
+        int aN = argsP.size();
+        if( aN != 1 ) {
+            err.println( "waycast-web-image: Expecting 1 argument, found " + aN );
+            exitWithUsage( 1 ); }
+        boundaryPath = Path.of(argsP.get(0)).toAbsolutePath();
+        aN = argsO.size();
+        for( int a = 0; a < aN; ++a ) {
+            final String arg = argsO.get( a );
+            String s;
+            if( arg.startsWith( s = "--style-sheet=" )) styleSheet = value( arg, s );
+            else if( arg.startsWith( s = "--style-sheet-intracast=" )) {
+                styleSheetIntracast = value( arg, s ); }
+            else {
+                err.println( "waycast-web-image: Unrecognized argument: " + arg );
+                exit( 1 ); }}}
 
 
 
     /** Takes a `waycast-web-image` command from the shell and executes it.
       */
     public static void main( final String[] arguments ) {
-        final int p; { // Expected start of positional arguments.
-            final int aN = arguments.length;
-            if( aN == 1 ) exitOnDemand( arguments[0] );
-            p = aN - 1;
-            if( p < 0 ) {
-                err.println( "waycast-web-image: Too few arguments: " + aN );
-                exitWithUsage( 1 ); }}
-        final var command = new WaycastWebImageCommand( Path.of(arguments[p]).toAbsolutePath() );
-        for( int a = 0; a < p/*argument is nominal, aka an option*/; ++a ) {
+        final var argsO = new ArrayList<String>();
+        final var argsP = new ArrayList<String>();
+        for( int a = 0, aN = arguments.length; a < aN; ++a ) {
             final String arg = arguments[a];
             exitOnDemand( arg );
-            String s;
-            if( arg.startsWith( s = "--style-sheet=" )) command.styleSheet = arg.substring( s.length() );
-            else if( arg.startsWith( s = "--style-sheet-intracast=" )) {
-                command.styleSheetIntracast = arg.substring( s.length() ); }
-            else {
-                err.println( "waycast-web-image: Unrecognized argument: " + arg );
-                exit( 1 ); }}
+            (arg.startsWith("--") ? argsO : argsP).add( arg ); }
+        final var command = new WaycastWebImageCommand( argsO, argsP );
         if( !command.run() ) exit( 1 ); }
 
 
@@ -100,7 +109,15 @@ public final class WaycastWebImageCommand { // [AFN]
 
 
 
-    String styleSheetIntracast = "http://reluk.ca/project/wayic/Web/imager/intracast_adjunct.css"; }
+    String styleSheetIntracast = "http://reluk.ca/project/wayic/Web/imager/intracast_adjunct.css";
+
+
+
+    /** @param arg A nominal argument, aka option.
+      * @param prefix The leading name and equals sign, e.g. "foo=".
+      */
+    private static String value( final String arg, final String prefix ) {
+        return arg.substring( prefix.length() ); }}
 
 
 
