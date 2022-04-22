@@ -3,6 +3,8 @@ package wayic.Web.imager;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import static java.lang.System.getProperty;
+
 
 /** The present project.
   */
@@ -21,9 +23,9 @@ public final class Project {
 
     /** The output directory of the present project.
       */
-    public static final Path outDirectory = Path.of(
-      System.getProperty("java.io.tmpdir"), "wayic.Web.imager" ); }
+    public static final Path outDirectory = Path.of( getProperty("java.io.tmpdir"),
+      "wayic.Web.imager_" + getProperty("user.name") ); }
 
 
 
-                                                        // Copyright © 2020  Michael Allan.  Licence MIT.
+                                                  // Copyright © 2020, 2022  Michael Allan.  Licence MIT.
