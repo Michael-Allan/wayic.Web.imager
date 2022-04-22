@@ -11,7 +11,7 @@
         - Any image file that is missing is formed anew, any that is outdated is reformed.
             - An image file is outdated unless it postdates both its source file
               and all formal resources of the source file.
-                : re `formal resources` see non-fractal `formalResources` @
+                : re `formal resources` see `formalResources` @ non-fractal
                   http://reluk.ca/project/Breccia/Web/imager/ExternalResources.java :
                   Typically these are Breccian referent files.
         - The working directory must be the command directory.
