@@ -42,10 +42,10 @@ public final class WaycastWebImageCommand { // [AFN]
         for( int a = 0; a < aN; ++a ) {
             final String arg = argsO.get( a );
             String s;
-            if( arg.startsWith( "--force" )) toForce = true;
-            else if( arg.startsWith( s = "--style-sheet=" )) styleSheet = value( arg, s );
+            if( arg.startsWith( "--force" )) opt.toForce = true;
+            else if( arg.startsWith( s = "--style-sheet=" )) opt.styleSheet = value( arg, s );
             else if( arg.startsWith( s = "--style-sheet-intracast=" )) {
-                styleSheetIntracast = value( arg, s ); }
+                opt.styleSheetIntracast = value( arg, s ); }
             else {
                 err.println( "waycast-web-image: Unrecognized argument: " + arg );
                 exit( 1 ); }}}
@@ -88,6 +88,10 @@ public final class WaycastWebImageCommand { // [AFN]
 
 
 
+    private final WaybrecImagingOptions opt = new WaybrecImagingOptions();
+
+
+
     /** @return True on success, false on failure.
       */
     private boolean run() {
@@ -98,23 +102,9 @@ public final class WaycastWebImageCommand { // [AFN]
         try { out = emptyDirectory( createDirectories( outDirectory.resolve( Path.of( "mould" )))); }
         catch( IOException x ) { throw new Unhandled( x ); } // Unexpected for `outDirectory`.
         try( final BrecciaXCursor sourceTranslator = new BrecciaXCursor() ) {
-            final var t = new BrecciaHTMLTransformer<>(
-              new BrecciaCursor(), sourceTranslator, styleSheet );
-            final var tW = new WaybrecHTMLTransformer(
-              new WaybrecCursor(), sourceTranslator, styleSheet, styleSheetIntracast, t );
-            return Imaging.image( "waycast-web-image", boundaryPath, tW, out, toForce ); }}
-
-
-
-    String styleSheet = "http://reluk.ca/project/Breccia/Web/imager/image.css";
-
-
-
-    String styleSheetIntracast = "http://reluk.ca/project/wayic/Web/imager/intracast_adjunct.css";
-
-
-
-    private boolean toForce;
+            final var t = new BrecciaHTMLTransformer<>( new BrecciaCursor(), sourceTranslator, opt );
+            final var tW = new WaybrecHTMLTransformer( new WaybrecCursor(), sourceTranslator, t, opt );
+            return Imaging.image( "waycast-web-image", boundaryPath, tW, out ); }}
 
 
 

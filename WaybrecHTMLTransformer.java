@@ -16,20 +16,18 @@ import static java.nio.file.Files.isDirectory;
 public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<WaybrecCursor> {
 
 
-    /** @see #sourceCursor
+    /** @see #sourceCursor()
       * @see #sourceTranslator
-      * @see #styleSheet
-      * @see #styleSheetIntracast
       * @param extracastTransformer The transformer to use for extracast source files.
       *   It may share the {@linkplain #sourceTranslator same source translator}.
       *   All other (namely intracast) source files will use the present transformer.
+      * @see #imagingOptions()
       */
     public WaybrecHTMLTransformer( WaybrecCursor sourceCursor, BrecciaXCursor sourceTranslator,
-          String styleSheet, String styleSheetIntracast,
-          FileTransformer<? extends ReusableCursor> extracastTransformer ) {
-        super( sourceCursor, sourceTranslator, styleSheet );
+          FileTransformer<? extends ReusableCursor> extracastTransformer, WaybrecImagingOptions opt ) {
+        super( sourceCursor, sourceTranslator, opt );
         this.extracastTransformer = extracastTransformer;
-        this.styleSheetIntracast = styleSheetIntracast; }
+        this.opt = opt; }
 
 
 
@@ -71,16 +69,11 @@ public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<Waybrec
 
 
 
+    private final WaybrecImagingOptions opt;
+
+
+
     private static final Path signatureWayFile = Path.of( "way.brec" );
-
-
-
-    /** The location of the adjunct style sheet for the intracast parts of the Web image,
-      * formally a URI reference.  It will be written verbatim into each intracast image file.
-      *
-      *     @see <a href='https://tools.ietf.org/html/rfc3986#section-4.1'>URI reference</a>
-      */
-    private final String styleSheetIntracast;
 
 
 
@@ -98,7 +91,7 @@ public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<Waybrec
         Element e;
         head.appendChild( e = d.createElement( "link" ));
         e.setAttribute( "rel", "stylesheet" );
-        e.setAttribute( "href", styleSheetIntracast ); }}
+        e.setAttribute( "href", opt.styleSheetIntracast ); }}
 
 
 
