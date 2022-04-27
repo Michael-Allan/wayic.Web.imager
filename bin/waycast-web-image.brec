@@ -26,6 +26,9 @@
 
     - The positional argument may be preceded by one or more nominal arguments, aka options:
 
+        --force
+            - Forcefully remakes the Web image.  Any preexisting image files are reformed
+              regardless of whether they were out of date.
         --style-sheet: --style-sheet=<URI reference>
                 : re `URI reference` see https://tools.ietf.org/html/rfc3986#section-4.1
             - Writes into each image file the given URI reference,

@@ -42,7 +42,8 @@ public final class WaycastWebImageCommand { // [AFN]
         for( int a = 0; a < aN; ++a ) {
             final String arg = argsO.get( a );
             String s;
-            if( arg.startsWith( s = "--style-sheet=" )) styleSheet = value( arg, s );
+            if( arg.startsWith( "--force" )) toForce = true;
+            else if( arg.startsWith( s = "--style-sheet=" )) styleSheet = value( arg, s );
             else if( arg.startsWith( s = "--style-sheet-intracast=" )) {
                 styleSheetIntracast = value( arg, s ); }
             else {
@@ -101,7 +102,7 @@ public final class WaycastWebImageCommand { // [AFN]
               new BrecciaCursor(), sourceTranslator, styleSheet );
             final var tW = new WaybrecHTMLTransformer(
               new WaybrecCursor(), sourceTranslator, styleSheet, styleSheetIntracast, t );
-            return Imaging.image( "waycast-web-image", boundaryPath, tW, out ); }}
+            return Imaging.image( "waycast-web-image", boundaryPath, tW, out, toForce ); }}
 
 
 
@@ -110,6 +111,10 @@ public final class WaycastWebImageCommand { // [AFN]
 
 
     String styleSheetIntracast = "http://reluk.ca/project/wayic/Web/imager/intracast_adjunct.css";
+
+
+
+    private boolean toForce;
 
 
 
