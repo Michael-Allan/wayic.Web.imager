@@ -24,18 +24,11 @@
             - Sets the bounds of the Web image: each Breccian source file stored at or under this path
               is made eligible for imaging.
 
-    - The positional argument may be preceded by one or more nominal arguments, aka options:
+    - The positional argument may be preceded by one or more nominal arguments, aka options.
+      Allowed arguments are those of the `breccia-web-image` command, plus the following.
+        : re `those of the .breccia-web-image. command` : see `nominal arguments, aka options:$` @
+          http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
 
-        --force
-            - Forcefully remakes the Web image.  Any preexisting image files are reformed
-              regardless of whether they were out of date.
-        --style-sheet: --style-sheet=<URI reference>
-                : re `URI reference` see https://tools.ietf.org/html/rfc3986#section-4.1
-            - Writes into each image file the given URI reference,
-              making its referent the basic style sheet for the image.
-            - The default value is `http://reluk.ca/project/Breccia/Web/imager/image.css`.
-                / Do not rely on it, however, because its content may postdate your installation
-                  and lead to mistyling.
         --style-sheet-intracast: --style-sheet-intracast=<URI reference>
                 : re `URI reference` see https://tools.ietf.org/html/rfc3986#section-4.1
             - Writes into each intracast image file the given URI reference,

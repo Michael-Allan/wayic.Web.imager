@@ -42,7 +42,8 @@ public final class WaycastWebImageCommand { // [AFN]
         for( int a = 0; a < aN; ++a ) {
             final String arg = argsO.get( a );
             String s;
-            if( arg.startsWith( "--force" )) opt.toForce = true;
+            if( arg.startsWith( s = "--centre-column" )) opt.centreColumn = value( arg, s );
+            else if( arg.startsWith( "--force" )) opt.toForce = true;
             else if( arg.startsWith( s = "--style-sheet=" )) opt.styleSheet = value( arg, s );
             else if( arg.startsWith( s = "--style-sheet-intracast=" )) {
                 opt.styleSheetIntracast = value( arg, s ); }
