@@ -26,7 +26,7 @@
 
     - The positional argument may be preceded by one or more nominal arguments, aka options.
       Allowed arguments are those of the `breccia-web-image` command, plus the following.
-        : re `those of the .breccia-web-image. command` : see `nominal arguments, aka options:$` @
+        : re `those of the .breccia-web-image. command` see `nominal arguments, aka options:$` @
           http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
 
         --style-sheet-intracast: --style-sheet-intracast=<URI reference>
