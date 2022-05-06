@@ -1,7 +1,7 @@
 package wayic.Web.imager;
 
 
-public class WaybrecImagingOptions extends Breccia.Web.imager.ImagingOptions {
+public class ImagingOptions extends Breccia.Web.imager.ImagingOptions {
 
 
     /** The location of the adjunct style sheet for the intracast parts of the Web image.

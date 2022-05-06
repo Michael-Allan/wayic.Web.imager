@@ -24,7 +24,7 @@ public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<Waybrec
       * @see #imagingOptions()
       */
     public WaybrecHTMLTransformer( WaybrecCursor sourceCursor, BrecciaXCursor sourceTranslator,
-          FileTransformer<? extends ReusableCursor> extracastTransformer, WaybrecImagingOptions opt ) {
+          FileTransformer<? extends ReusableCursor> extracastTransformer, ImagingOptions opt ) {
         super( sourceCursor, sourceTranslator, opt );
         this.extracastTransformer = extracastTransformer;
         this.opt = opt; }
@@ -69,7 +69,7 @@ public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<Waybrec
 
 
 
-    private final WaybrecImagingOptions opt;
+    private final ImagingOptions opt;
 
 
 
