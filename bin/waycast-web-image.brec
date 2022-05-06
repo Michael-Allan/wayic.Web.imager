@@ -24,20 +24,20 @@
             - Sets the bounds of the Web image: each Breccian source file stored at or under this path
               is made eligible for imaging.
 
-    - The positional argument may be preceded by one or more nominal arguments, aka options.
-      Allowed arguments are those of the `breccia-web-image` command, plus the following.
-        : re `those of the .breccia-web-image. command` see `nominal arguments, aka options:$` @
-          http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
+    - The positional argument may be preceded by one or more nominal arguments, aka options:
 
-        --style-sheet-intracast: --style-sheet-intracast=<URI reference>
-                : re `URI reference` see https://tools.ietf.org/html/rfc3986#section-4.1
-            - Writes into each intracast image file the given URI reference,
-              making its referent an adjunct style sheet for the intracast parts of the image,
-              additional to the basic style sheet.
-                : re `basic style sheet` see `^^--style-sheet:` @ `nominal arguments:$`
-            - The default value is `http://reluk.ca/project/wayic/Web/imager/intracast_adjunct.css`.
-                / Do not rely on it, however, because its content may postdate your installation
-                  and lead to mistyling.
+        --centre-column: --centre-column=<number>
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
+        --co-service-directory: --co-service-directory=<URI reference>
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
+            - Under this directory (here CS) the following files must be stored.
+                : cf. @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
+                • `<CS>/Breccia/Web/imager/image.css`
+                    : see http://reluk.ca/project/Breccia/Web/imager/image.css
+                • `<CS>/wayic/Web/imager/image.css`
+                    : see image.css
+        --force
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
 
 
     ━━━━━━━━━━
