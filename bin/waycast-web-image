@@ -83,6 +83,8 @@ public final class WaycastWebImageCommand { // [AFN]
         err.println( "Usage: waycast-web-image [<options>] <boundary path>" );
         err.println( "       waycast-web-image --help | -?" );
         err.println( "Options, one or more of:" );
+        err.println( "    --centre-column=<number>" );
+        err.println( "    --force" );
         err.println( "    --style-sheet=<URI reference>" );
         err.println( "    --style-sheet-intracast=<URI reference>" );
         exit( status ); }
