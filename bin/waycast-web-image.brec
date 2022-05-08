@@ -34,6 +34,8 @@
                 : cf. @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
                 • `<CS>/Breccia/Web/imager/image.css`
                     : see http://reluk.ca/project/Breccia/Web/imager/image.css
+                • `<CS>/font/FairfaxHD.ttf`
+                    : see https://www.kreativekorp.com/software/fonts/fairfaxhd.shtml
                 • `<CS>/wayic/Web/imager/image.css`
                     : see image.css
         --force
