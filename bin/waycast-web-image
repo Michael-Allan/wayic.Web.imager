@@ -8,7 +8,6 @@ import Breccia.Web.imager.*;
 import Breccia.XML.translator.BrecciaXCursor;
 import java.io.IOException;
 import java.nio.file.Path;
-import Java.Unhandled;
 import java.util.ArrayList;
 import java.util.List;
 import wayic.Waybrec.parser.WaybrecCursor;
@@ -24,7 +23,7 @@ import static wayic.Web.imager.Project.outDirectory;
   *     @see <a href='http://reluk.ca/project/wayic/Web/imager/bin/waycast-web-image.brec'>
   *       The `waycast-web-image` command</a>
   */
-public final class WaycastWebImageCommand { // [AFN]
+public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
 
 
     /** @param argsO Nominal arguments, aka options.
@@ -61,8 +60,15 @@ public final class WaycastWebImageCommand { // [AFN]
             final String arg = arguments[a];
             exitOnDemand( arg );
             (arg.startsWith("--") ? argsO : argsP).add( arg ); }
-        final var command = new WaycastWebImageCommand( argsO, argsP );
-        if( !command.run() ) exit( 1 ); }
+        try( final var command = new WaycastWebImageCommand( argsO, argsP )) {
+            if( !command.run() ) exit( 1 ); }}
+
+
+
+   // ━━━  A u t o   C l o s e a b l e  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+    public @Override void close() { sourceTranslator.close(); }
 
 
 
@@ -98,16 +104,12 @@ public final class WaycastWebImageCommand { // [AFN]
     /** @return True on success, false on failure.
       */
     private boolean run() {
-        if( !exists( boundaryPath )) {
-            err.println( "waycast-web-image: No such file or directory: " + boundaryPath );
-            return false; }
-        final Path out;
-        try { out = emptyDirectory( createDirectories( outDirectory.resolve( Path.of( "mould" )))); }
-        catch( IOException x ) { throw new Unhandled( x ); } // Unexpected for `outDirectory`.
-        try( final BrecciaXCursor sourceTranslator = new BrecciaXCursor() ) {
-            final var t = new BrecciaHTMLTransformer<>( new BrecciaCursor(), sourceTranslator, opt );
-            final var tW = new WaybrecHTMLTransformer( new WaybrecCursor(), sourceTranslator, t, opt );
-            return Imaging.image( "waycast-web-image", boundaryPath, tW, out ); }}
+        return Imaging.image( "waycast-web-image", boundaryPath, opt, new TransformerMaker(),
+          outDirectory ); }
+
+
+
+    private final BrecciaXCursor sourceTranslator = new BrecciaXCursor();
 
 
 
@@ -115,7 +117,21 @@ public final class WaycastWebImageCommand { // [AFN]
       * @param prefix The leading name and equals sign, e.g. "foo=".
       */
     private static String value( final String arg, final String prefix ) {
-        return arg.substring( prefix.length() ); }}
+        return arg.substring( prefix.length() ); }
+
+
+
+   // ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+
+
+    private final class TransformerMaker implements FileTransformer.Maker<WaybrecCursor> {
+
+
+        public @Override FileTransformer<WaybrecCursor> newTransformer( ImageMould<?> mould ) {
+            final var t = new BrecciaHTMLTransformer<>( new BrecciaCursor(), sourceTranslator, mould );
+            final var tW = new WaybrecHTMLTransformer( new WaybrecCursor(), sourceTranslator, mould, t,
+              opt );
+            return tW; }}}
 
 
 
