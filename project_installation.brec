@@ -19,8 +19,11 @@ Installation instructions for the waycast Web imager
             : join @ http://reluk.ca/project/Breccia/Web/imager/project_installation.brec
             >+ build wayic/Web/imager class-files
         4+ Test your access to the `waycast-web-image` command.
-            >+ wayic/Web/imager/bin/waycast-web-image -?
-                / ⇒  Usage: waycast-web-image <path>...
+            >+ wayic/Web/imager/bin/waycast-web-image --help
+            /
+            ⇒  Usage: breccia-web-image [<options>] <boundary path>
+           
+                        ⋮
 
     rebuild script
         - If you expect to modify the source code of dependencies (direct or indirect),
@@ -33,4 +36,4 @@ Installation instructions for the waycast Web imager
             : join @ http://reluk.ca/project/Breccia/project_installation.brec
 
 
-                                                    \ Copyright © 2020-2021  Michael Allan.  Licence MIT.
+                                                    \ Copyright © 2020-2022  Michael Allan.  Licence MIT.
