@@ -30,15 +30,19 @@
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --co-service-directory: --co-service-directory=<URI reference>
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-            - Under this directory (here CS) the following files must be stored.
+            - Under this directory (here ‘<CS>’) the following files must be stored.
                 : cf. @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
                 • `<CS>/Breccia/Web/imager/image.css`
                     : see http://reluk.ca/project/Breccia/Web/imager/image.css
-                • `<CS>/font/FairfaxHD.ttf`
-                    : see https://www.kreativekorp.com/software/fonts/fairfaxhd.shtml
+                • `<CS>/<font>`
+                    : re `<font>` see `^^--font`
                 • `<CS>/wayic/Web/imager/image.css`
                     : see image.css
+        --font: --font=<relative file path>
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --force
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
+        --glyph-test-font: --glyph-test-font=<file path> | none
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
 
 

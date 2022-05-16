@@ -13,11 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import wayic.Waybrec.parser.WaybrecCursor;
 
-import static Java.Files.emptyDirectory;
 import static java.lang.System.err;
 import static java.lang.System.exit;
-import static java.nio.file.Files.createDirectories;
-import static java.nio.file.Files.exists;
 import static Java.Path.enslash;
 import static wayic.Web.imager.Project.outDirectory;
 
@@ -46,7 +43,9 @@ public final class WaycastWebImageCommand { // [AFN]
             if( arg.startsWith( s = "--centre-column" )) opt.centreColumn = value( arg, s );
             else if( arg.startsWith( s = "--co-service-directory=" )) {
                 opt.coServiceDirectory = enslash( value( arg, s )); }
+            else if( arg.startsWith( s = "--font" )) opt.font = value( arg, s );
             else if( arg.startsWith( "--force" )) opt.toForce = true;
+            else if( arg.startsWith( s = "--glyph-test-font" )) opt.glyphTestFont = value( arg, s );
             else {
                 err.println( "waycast-web-image: Unrecognized argument: " + arg );
                 exit( 1 ); }}}
@@ -85,7 +84,9 @@ public final class WaycastWebImageCommand { // [AFN]
         err.println( "Options, one or more of:" );
         err.println( "    --centre-column=<number>" );
         err.println( "    --co-service-directory=<URI reference>" );
+        err.println( "    --font=<relative file path>" );
         err.println( "    --force" );
+        err.println( "    --glyph-test-font=<file path> | none" );
         exit( status ); }
 
 

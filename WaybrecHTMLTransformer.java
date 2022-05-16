@@ -21,13 +21,12 @@ public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<Waybrec
       * @param extracastTransformer The transformer to use for extracast source files.
       *   It may share the {@linkplain #sourceTranslator same source translator}.
       *   All other (namely intracast) source files will use the present transformer.
-      * @see #imagingOptions()
       */
     public WaybrecHTMLTransformer( WaybrecCursor sourceCursor, BrecciaXCursor sourceTranslator,
-          FileTransformer<? extends ReusableCursor> extracastTransformer, ImagingOptions opt ) {
-        super( sourceCursor, sourceTranslator, opt );
+          FileTransformer<? extends ReusableCursor> extracastTransformer, final ImageMould mould ) {
+        super( sourceCursor, sourceTranslator, mould );
         this.extracastTransformer = extracastTransformer;
-        this.opt = opt; }
+        opt = mould.opt; }
 
 
 
