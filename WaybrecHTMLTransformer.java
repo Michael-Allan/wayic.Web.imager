@@ -90,7 +90,7 @@ public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<Waybrec
         Element e;
         head.appendChild( e = d.createElement( "link" ));
         e.setAttribute( "rel", "stylesheet" );
-        e.setAttribute( "href", opt.coServiceDirectory + "wayic/Web/imager/image.css" ); }}
+        e.setAttribute( "href", opt.coServiceDirectory() + "wayic/Web/imager/image.css" ); }}
 
 
 

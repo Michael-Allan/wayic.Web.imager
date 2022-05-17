@@ -7,6 +7,7 @@ import Breccia.parser.plain.BrecciaCursor;
 import Breccia.Web.imager.*;
 import Breccia.XML.translator.BrecciaXCursor;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,6 @@ import wayic.Waybrec.parser.WaybrecCursor;
 
 import static java.lang.System.err;
 import static java.lang.System.exit;
-import static Java.Path.enslash;
 import static wayic.Web.imager.Project.outDirectory;
 
 
@@ -26,41 +26,28 @@ import static wayic.Web.imager.Project.outDirectory;
 public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
 
 
-    /** @param argsO Nominal arguments, aka options.
+    /** @param argsN Nominal arguments, aka options.
       * @param argsP Positional arguments.
       */
-    private WaycastWebImageCommand( final  List<String> argsO, final List<String> argsP ) {
-        int aN = argsP.size();
-        if( aN != 1 ) {
-            err.println( "waycast-web-image: Expecting 1 argument, found " + aN );
-            exitWithUsage( 1 ); }
-        boundaryPath = Path.of(argsP.get(0)).toAbsolutePath();
-        aN = argsO.size();
-        for( int a = 0; a < aN; ++a ) {
-            final String arg = argsO.get( a );
-            String s;
-            if( arg.startsWith( s = "--centre-column" )) opt.centreColumn = value( arg, s );
-            else if( arg.startsWith( s = "--co-service-directory=" )) {
-                opt.coServiceDirectory = enslash( value( arg, s )); }
-            else if( arg.startsWith( s = "--font" )) opt.font = value( arg, s );
-            else if( arg.startsWith( "--force" )) opt.toForce = true;
-            else if( arg.startsWith( s = "--glyph-test-font" )) opt.glyphTestFont = value( arg, s );
-            else {
-                err.println( "waycast-web-image: Unrecognized argument: " + arg );
-                exit( 1 ); }}}
+    private WaycastWebImageCommand( final  List<String> argsN, final List<String> argsP ) {
+        opt.initialize( argsN );
+        final int n = argsP.size();
+        if( n != 1 ) {
+            err.println( commandName + ": Expecting 1 argument, found " + n );
+            exitWithUsage( err, 1 ); }
+        boundaryPath = Path.of(argsP.get(0)).toAbsolutePath(); }
 
 
 
     /** Takes a `waycast-web-image` command from the shell and executes it.
       */
     public static void main( final String[] arguments ) {
-        final var argsO = new ArrayList<String>();
+        final var argsN = new ArrayList<String>();
         final var argsP = new ArrayList<String>();
-        for( int a = 0, aN = arguments.length; a < aN; ++a ) {
-            final String arg = arguments[a];
+        for( final String arg: arguments ) {
             exitOnDemand( arg );
-            (arg.startsWith("--") ? argsO : argsP).add( arg ); }
-        try( final var command = new WaycastWebImageCommand( argsO, argsP )) {
+            (arg.startsWith("--") ? argsN : argsP).add( arg ); }
+        try( final var command = new WaycastWebImageCommand( argsN, argsP )) {
             if( !command.run() ) exit( 1 ); }}
 
 
@@ -79,14 +66,18 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
 
 
 
+    private static final String commandName = "waycast-web-image";
+
+
+
     private static void exitOnDemand( final String arg ) {
-        if( arg.equals("-?") || arg.equals("--help") ) exitWithUsage( 0 ); }
+        if( arg.equals("-?") || arg.equals("--help") ) exitWithUsage( System.out, 0 ); }
 
 
 
-    private static void exitWithUsage( final int status ) {
-        err.println( "Usage: waycast-web-image [<options>] <boundary path>" );
-        err.println( "       waycast-web-image --help | -?" );
+    private static void exitWithUsage( final PrintStream out, final int status ) {
+        out.println( "Usage: " + commandName + " [<options>] <boundary path>" );
+        out.println( "       " + commandName + " --help | -?" );
         err.println( "Options, one or more of:" );
         err.println( "    --centre-column=<number>" );
         err.println( "    --co-service-directory=<URI reference>" );
@@ -97,27 +88,18 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
 
 
 
-    private final ImagingOptions opt = new ImagingOptions();
+    private final ImagingOptions opt = new ImagingOptions( commandName );
 
 
 
     /** @return True on success, false on failure.
       */
     private boolean run() {
-        return Imaging.image( "waycast-web-image", boundaryPath, opt, new TransformerMaker(),
-          outDirectory ); }
+        return Imaging.image( commandName, boundaryPath, opt, new TransformerMaker(), outDirectory ); }
 
 
 
     private final BrecciaXCursor sourceTranslator = new BrecciaXCursor();
-
-
-
-    /** @param arg A nominal argument, aka option.
-      * @param prefix The leading name and equals sign, e.g. "foo=".
-      */
-    private static String value( final String arg, final String prefix ) {
-        return arg.substring( prefix.length() ); }
 
 
 
