@@ -12,7 +12,7 @@ public class ImagingOptions extends Breccia.Web.imager.ImagingOptions {
 
     protected @Override void initialize( final String arg ) {
      // String s;
-     // if( arg.startsWith( s = "--foo" )) foo = value( arg, s );
+     // if( arg.startsWith( s = "--foo=" )) foo = value( arg, s );
      // else super.initialize( arg ); }}
         super.initialize( arg ); }}
 
