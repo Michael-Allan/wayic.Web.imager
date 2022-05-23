@@ -10,11 +10,13 @@ public class ImagingOptions extends Breccia.Web.imager.ImagingOptions {
 
 
 
-    protected @Override void initialize( final String arg ) {
+    protected @Override boolean initialize( final String arg ) {
+     // boolean isGo = true;
      // String s;
      // if( arg.startsWith( s = "--foo=" )) foo = value( arg, s );
-     // else super.initialize( arg ); }}
-        super.initialize( arg ); }}
+     // else isGo = super.initialize( arg );
+     // return isGo; }}
+        return super.initialize( arg ); }}
 
 
 
