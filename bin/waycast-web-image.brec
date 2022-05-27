@@ -47,6 +47,12 @@
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --glyph-test-font: --glyph-test-font=<file path> | none
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
+        --quiet
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
+        --verbose
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
+        --verbosity: --verbosity=0|1|2
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
 
 
     ━━━━━━━━━━
