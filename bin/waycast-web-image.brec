@@ -30,19 +30,22 @@
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --co-service-directory: --co-service-directory=<URI reference>
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-            - This directory (here ‘<CS>’) contains the auxiliary files of the Web image.
-            - The auxiliary files must include, at a minimum, the following.
-                : cf. @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-                style sheets: `<CS>/Breccia/Web/imager/image.css`
-                              `<CS>/wayic/Web/imager/image.css`
-                    - Typically each is a copy of the bundled sheet, or a custom sheet
-                      that imports from a copy of the bundled sheet.
-                        : re `bundled sheet` see http://reluk.ca/project/Breccia/Web/imager/image.css
-                        : re `bundled sheet` see image.css
-            - Any resource file referred to by the style sheets must also be included.
-              The bundled sheets require the following.
-                font file: `<CS>/Breccia/Web/imager/FairfaxHD.ttf`
-                    : see https://www.kreativekorp.com/software/fonts/fairfaxhd.shtml
+            - The co-service directory must contain the following auxiliary files at a minimum.
+                    : cf. @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
+
+                    style sheets: `<CS>/Breccia/Web/imager/image.css`
+                                  `<CS>/wayic/Web/imager/image.css`
+                        - Typically each is a copy of the bundled sheet, or a custom sheet
+                          that imports from a copy of the bundled sheet.
+                            : re `bundled sheet` see http://reluk.ca/project/Breccia/Web/imager/image.css
+                            : re `bundled sheet` see image.css
+
+                - Any resource files referred to by the style sheets must also be included.
+                  For the bundled sheets, these are:
+
+                    font file: `<CS>/Breccia/Web/imager/FairfaxHD.ttf`
+                        : see https://www.kreativekorp.com/software/fonts/fairfaxhd.shtml
+
         --force
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --glyph-test-font: --glyph-test-font=<file path> | none
