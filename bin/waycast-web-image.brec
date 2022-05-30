@@ -43,7 +43,8 @@
                 - Any resource files referred to by the style sheets must also be included.
                   For the bundled sheets, these are:
 
-                    font file: `<CS>/Breccia/Web/imager/FairfaxHD.ttf`
+                    font files: `<CS>/Breccia/Web/imager/FairfaxHD.ttf`,
+                               `<CS>/Breccia/Web/imager/FairfaxHD.woff2`
                         : see https://www.kreativekorp.com/software/fonts/fairfaxhd.shtml
 
         --force
