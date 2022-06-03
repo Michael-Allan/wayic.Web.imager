@@ -1,2 +1,13 @@
 /* Adjunct style sheet for the intracast parts of Breccian Web images
  */
+@namespace brec 'data:,Breccia/XML';
+
+
+    /* Thoroughfractum designators
+     */
+    brec|ThoroughfractumDesignator > Head {
+        color: var(--command-point-head-colour); }
+
+    brec|ThoroughfractumDesignator > Head > Bullet {
+        color:       var(--command-point-bullet-colour);
+        font-weight: var(--command-point-bullet-weight); }
