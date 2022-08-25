@@ -16,7 +16,7 @@
                   Typically these are Breccian referent files.
         - The working directory must be the command directory.
             : see `^^working directory$` @ `^^shell commands$` @
-              http://reluk.ca/project/Java/notepad.brec
+              http://reluk.ca/project/Java/working_notes.brec
     - One positional argument is required:
 
         <boundary path>
