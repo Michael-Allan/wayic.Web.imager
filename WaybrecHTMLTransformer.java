@@ -72,11 +72,11 @@ public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<Waybrec
 
 
 
-    private static final Path signatureWayFile = Path.of( "way.brec" );
+    private static final Path signatureWayFile = Path.of( "README.brec" );
 
 
 
-    private static final Path waycastDirectoryName = Path.of( "waycast" );
+    private static final Path waycastDirectoryName = Path.of( "way" );
 
 
 
