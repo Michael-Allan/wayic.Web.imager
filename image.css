@@ -11,3 +11,9 @@
     brec|ThoroughfractumDesignator > Head > Bullet {
         color:       var(--command-point-bullet-colour);
         font-weight: var(--command-point-bullet-weight); }
+
+    brec|ThoroughfractumDesignator > Head > Descriptor > Command {
+        color: var(--command-operator-colour); }
+
+
+                                                     /* Copyright © 2022  Michael Allan.  Licence MIT. */
