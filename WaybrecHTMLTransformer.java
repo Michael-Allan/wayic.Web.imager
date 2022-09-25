@@ -33,6 +33,12 @@ public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<Waybrec
    // ━━━  F i l e   T r a n s f o r m e r  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
+    public @Override void finish( final Path imageFile ) {
+        if( isIntracast( imageFile )) super.finish( imageFile );
+        else           extracastTransformer.finish( imageFile ); }
+
+
+
     public @Override Markup formalReferenceAt( final WaybrecCursor sourceCursor ) throws ParseError {
         Markup ref = super.formalReferenceAt( sourceCursor );
         if( ref == null ) {
@@ -43,10 +49,8 @@ public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<Waybrec
 
     public @Override void transform( final Path sourceFile, final Path imageDirectory )
           throws ParseError, TransformError {
-        if( !isIntracast( sourceFile )) {
-            extracastTransformer.transform( sourceFile, imageDirectory );
-            return; }
-        super.transform( sourceFile, imageDirectory ); }
+        if( isIntracast( sourceFile )) super.transform( sourceFile, imageDirectory );
+        else            extracastTransformer.transform( sourceFile, imageDirectory ); }
 
 
 
