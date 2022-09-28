@@ -1,22 +1,17 @@
 package wayic.Web.imager;
 
 
+/** @see <a href='http://reluk.ca/project/wayic/Web/imager/bin/waycast-web-image.brec.xht#positional,argument,arguments'>
+  *   Options for the `waycast-web-image` command</a>
+  */
 public class ImagingOptions extends Breccia.Web.imager.ImagingOptions {
 
 
-    /** @see #commandName
-      */
     public ImagingOptions( String commandName ) { super( commandName ); } // [SLA]
 
 
 
-    protected @Override boolean initialize( final String arg ) {
-     // boolean isGo = true;
-     // String s;
-     // if( arg.startsWith( s = "--foo=" )) foo = value( arg, s );
-     // else isGo = super.initialize( arg );
-     // return isGo; }}
-        return super.initialize( arg ); }}
+    protected @Override boolean initialize( final String arg ) { return super.initialize( arg ); }}
 
 
 
