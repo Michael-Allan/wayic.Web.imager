@@ -16,13 +16,13 @@
                   Typically these are Breccian referent files.
         - The working directory must be the command directory.
             : see `^^working directory$` @ `^^shell commands$` @
-              http://reluk.ca/project/Java/working_notes.brec
+              http://reluk.ca/project/Java/editorial_guidelines.brec
     - One positional argument is required:
 
         <boundary path>
             / The path of a file or directory.
-            - Sets the bounds of the Web image: each Breccian source file stored at or under this path
-              is made eligible for imaging.
+            - Sets the bounds of the Web image: any Breccian source file stored at or under this path
+              is eligible for imaging.
 
     - The positional argument may be preceded by one or more nominal arguments, aka options:
 
