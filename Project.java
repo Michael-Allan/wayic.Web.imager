@@ -15,16 +15,19 @@ public final class Project {
 
 
 
-    /** The logger proper to the present project.
-      */
-    static final Logger logger = Logger.getLogger( "wayic.Web.imager" );
-
-
-
     /** The output directory of the present project.
       */
     public static final Path outDirectory = Path.of( getProperty("java.io.tmpdir"),
-      "wayic.Web.imager_" + getProperty("user.name") ); }
+      "wayic.Web.imager_" + getProperty("user.name") );
+
+
+
+////  P r i v a t e  ////////////////////////////////////////////////////////////////////////////////////
+
+
+    /** The logger proper to the present project.
+      */
+    static final Logger logger = Logger.getLogger( "wayic.Web.imager" ); }
 
 
 
