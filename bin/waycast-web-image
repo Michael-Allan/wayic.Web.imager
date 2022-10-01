@@ -75,17 +75,17 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
 
 
 
-    private static void exitWithUsage( final PrintStream out, final int status ) {
-        out.println( "Usage: " + commandName + " [<options>] <boundary path>" );
-        out.println( "       " + commandName + " --help | -?" );
-        err.println( "Options, one or more of:" );
-        err.println( "    --centre-column=<number>" );
-        err.println( "    --co-service-directory=<URI reference>" );
-        err.println( "    --force" );
-        err.println( "    --glyph-test-font=<file path> | none" );
-        out.println( "    --quiet" );
-        out.println( "    --verbose" );
-        out.println( "    --verbosity=0|1|2" );
+    private static void exitWithUsage( final PrintStream sP, final int status ) {
+        sP.println( "Usage: " + commandName + " [<options>] <boundary path>" );
+        sP.println( "       " + commandName + " --help | -?" );
+        sP.println( "Options, one or more of:" );
+        sP.println( "    --centre-column=<number>" );
+        sP.println( "    --co-service-directory=<URI reference>" );
+        sP.println( "    --force" );
+        sP.println( "    --glyph-test-font=<file path> | none" );
+        sP.println( "    --quiet" );
+        sP.println( "    --verbose" );
+        sP.println( "    --verbosity=0|1|2" );
         exit( status ); }
 
 
