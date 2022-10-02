@@ -17,8 +17,8 @@ public class ImagingOptions extends Breccia.Web.imager.ImagingOptions {
 
 // NOTE
 // ────
-//   SLA  Source-launch access.  This member would have `protected` access if access were not needed by
-//        the `WaycastWebImageCommand` class.  Source launched and loaded by a separate class loader,
+//   SLA  Source-launch access.  This member would have `protected` access were it not needed by
+//        class `WaycastWebImageCommand`.  Source launched and loaded by a separate class loader,
 //        that class is treated at runtime as residing in a separate package.
 
 
