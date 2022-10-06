@@ -33,7 +33,7 @@ public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<Waybrec
    // ━━━  F i l e   T r a n s f o r m e r  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-    public @Override void finish( final Path imageFile ) {
+    public @Override void finish( final Path imageFile ) throws TransformError {
         if( isIntracast( imageFile )) super.finish( imageFile );
         else           extracastTransformer.finish( imageFile ); }
 
