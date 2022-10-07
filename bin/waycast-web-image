@@ -55,7 +55,7 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
    // ━━━  A u t o   C l o s e a b l e  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-    public @Override void close() { sourceTranslator.close(); }
+    public @Override void close() { sourceXCursor.close(); }
 
 
 
@@ -97,23 +97,23 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
     /** @return True on success, false on failure.
       */
     private boolean run() {
-        return Imaging.image( commandName, boundaryPath, opt, new TransformerMaker(), outDirectory ); }
+        return Imaging.image( commandName, boundaryPath, opt, new TranslatorMaker(), outDirectory ); }
 
 
 
-    private final BrecciaXCursor sourceTranslator = new BrecciaXCursor();
+    private final BrecciaXCursor sourceXCursor = new BrecciaXCursor();
 
 
 
    // ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
 
-    private final class TransformerMaker implements FileTransformer.Maker<WaybrecCursor> {
+    private final class TranslatorMaker implements FileTranslator.Maker<WaybrecCursor> {
 
 
-        public @Override FileTransformer<WaybrecCursor> newTransformer( ImageMould<?> mould ) {
-            final var t = new BrecciaHTMLTransformer<>( new BrecciaCursor(), sourceTranslator, mould );
-            final var tW = new WaybrecHTMLTransformer( new WaybrecCursor(), sourceTranslator, mould, t,
+        public @Override FileTranslator<WaybrecCursor> newTranslator( ImageMould<?> mould ) {
+            final var t = new BreccianFileTranslator<>( new BrecciaCursor(), sourceXCursor, mould );
+            final var tW = new WaybreccianFileTranslator( new WaybrecCursor(), sourceXCursor, mould, t,
               opt );
             return tW; }}}
 

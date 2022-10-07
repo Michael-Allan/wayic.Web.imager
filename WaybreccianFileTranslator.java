@@ -13,29 +13,29 @@ import static java.nio.file.Files.exists;
 import static java.nio.file.Files.isDirectory;
 
 
-public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<WaybrecCursor> {
+public final class WaybreccianFileTranslator extends BreccianFileTranslator<WaybrecCursor> {
 
 
     /** @see #sourceCursor()
-      * @see #sourceTranslator
-      * @param extracastTransformer The transformer to use for extracast source files.
-      *   All other (namely intracast) source files will use the present transformer.
-      *   Both transformers may share the same {@linkplain #sourceTranslator source translator}.
+      * @see #sourceXCursor
+      * @param extracastTranslator The translator to use for extracast source files.
+      *   All other (namely intracast) source files will use the present translator.
+      *   Both translators may share the same {@linkplain #sourceXCursor `sourceXCursor`}.
       */
-    public WaybrecHTMLTransformer( WaybrecCursor sourceCursor, BrecciaXCursor sourceTranslator,
-          ImageMould<?> mould, FileTransformer<?> extracastTransformer, ImagingOptions opt ) {
-        super( sourceCursor, sourceTranslator, mould );
-        this.extracastTransformer = extracastTransformer;
+    public WaybreccianFileTranslator( WaybrecCursor sourceCursor, BrecciaXCursor sourceXCursor,
+          ImageMould<?> mould, FileTranslator<?> extracastTranslator, ImagingOptions opt ) {
+        super( sourceCursor, sourceXCursor, mould );
+        this.extracastTranslator = extracastTranslator;
         this.opt = opt; }
 
 
 
-   // ━━━  F i l e   T r a n s f o r m e r  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   // ━━━  F i l e   T r a n s l a t o r  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-    public @Override void finish( final Path imageFile ) throws TransformError {
+    public @Override void finish( final Path imageFile ) throws ErrorAtFile {
         if( isIntracast( imageFile )) super.finish( imageFile );
-        else           extracastTransformer.finish( imageFile ); }
+        else            extracastTranslator.finish( imageFile ); }
 
 
 
@@ -47,17 +47,17 @@ public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<Waybrec
 
 
 
-    public @Override void transform( final Path sourceFile, final Path imageDirectory )
-          throws ParseError, TransformError {
-        if( isIntracast( sourceFile )) super.transform( sourceFile, imageDirectory );
-        else            extracastTransformer.transform( sourceFile, imageDirectory ); }
+    public @Override void translate( final Path sourceFile, final Path imageDirectory )
+          throws ParseError, ErrorAtFile {
+        if( isIntracast( sourceFile )) super.translate( sourceFile, imageDirectory );
+        else             extracastTranslator.translate( sourceFile, imageDirectory ); }
 
 
 
 ////  P r i v a t e  ////////////////////////////////////////////////////////////////////////////////////
 
 
-    private final FileTransformer<?> extracastTransformer;
+    private final FileTranslator<?> extracastTranslator;
 
 
 
@@ -87,8 +87,8 @@ public final class WaybrecHTMLTransformer extends BrecciaHTMLTransformer<Waybrec
    // ━━━  B r e c c i a   H T M L   T r a n s f o r m e r  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-    protected @Override void transform( final Document d ) {
-        super.transform( d );
+    protected @Override void translate( final Document d ) {
+        super.translate( d );
         final Node head = d.getFirstChild()/*html*/.getFirstChild();
         assert "head".equals( head.getLocalName() );
         Element e;
