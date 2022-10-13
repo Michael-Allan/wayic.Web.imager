@@ -11,6 +11,7 @@ import wayic.Waybrec.parser.WaybrecCursor;
 
 import static java.nio.file.Files.exists;
 import static java.nio.file.Files.isDirectory;
+import static Java.Nodes.hasName;
 
 
 public final class WaybreccianFileTranslator extends BreccianFileTranslator<WaybrecCursor> {
@@ -90,7 +91,7 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
     protected @Override void translate( final Document d ) {
         super.translate( d );
         final Node head = d.getFirstChild()/*html*/.getFirstChild();
-        assert "head".equals( head.getLocalName() );
+        assert hasName( "head", head );
         Element e;
         head.appendChild( e = d.createElement( "link" ));
         e.setAttribute( "rel", "stylesheet" );
