@@ -20,7 +20,7 @@
     - One positional argument is required:
 
         <boundary path>
-            / The path of a file or directory.
+            / The path of a local file or directory.
             - Sets the bounds of the Web image: any Breccian source file stored at or under this path
               is eligible for imaging.
 
@@ -49,9 +49,11 @@
 
         --force
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-        --glyph-test-font: --glyph-test-font=<file path> | none
+        --glyph-test-font: --glyph-test-font=<local file path> | none
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --quiet
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
+        --user-home-directory: --user-home-directory=<local file path>
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --verbose
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
