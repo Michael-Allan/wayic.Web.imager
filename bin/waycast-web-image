@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import wayic.Waybrec.parser.WaybrecCursor;
 
+import static Breccia.Web.imager.ImagingCommands.image;
 import static java.lang.System.err;
 import static java.lang.System.exit;
 import static wayic.Web.imager.Project.outDirectory;
@@ -98,7 +99,7 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
     /** @return True on success, false on failure.
       */
     private boolean run() {
-        return Imaging.image( commandName, boundaryPath, opt, new TranslatorMaker(), outDirectory ); }
+        return image( commandName, boundaryPath, opt, new TranslatorMaker(), outDirectory ); }
 
 
 
