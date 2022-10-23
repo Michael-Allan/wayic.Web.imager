@@ -34,9 +34,9 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
    // ━━━  F i l e   T r a n s l a t o r  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-    public @Override void finish( final Path imageFile ) throws ErrorAtFile {
-        if( isIntracast( imageFile )) super.finish( imageFile );
-        else            extracastTranslator.finish( imageFile ); }
+    public @Override void finish( Path sourceFile, final Path imageFile ) throws ErrorAtFile {
+        if( isIntracast( imageFile )) super.finish( sourceFile, imageFile );
+        else            extracastTranslator.finish( sourceFile, imageFile ); }
 
 
 
