@@ -40,8 +40,8 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
 
 
 
-    public @Override Markup formalReferenceAt( final WaybrecCursor sourceCursor ) throws ParseError {
-        Markup ref = super.formalReferenceAt( sourceCursor );
+    public @Override Granum formalReferenceAt( final WaybrecCursor sourceCursor ) throws ParseError {
+        Granum ref = super.formalReferenceAt( sourceCursor );
         if( ref == null ) {
             /* TODO, any Waybreccian part */; }
         return ref; }
