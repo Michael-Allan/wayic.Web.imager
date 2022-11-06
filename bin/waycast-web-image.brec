@@ -40,7 +40,7 @@
                         - Typically each is a copy of the bundled sheet, or a custom sheet
                           that imports from a copy of the bundled sheet.
                             : re `bundled sheet` see http://reluk.ca/project/Breccia/Web/imager/image.css
-                            : re `bundled sheet` see image.css
+                            : re `bundled sheet` see ../image.css
 
                 - Any resource files referred to by the style sheets must also be included.
                   For the bundled sheets, these are:
