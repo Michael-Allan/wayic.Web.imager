@@ -26,8 +26,6 @@
 
     - The positional argument may be preceded by one or more nominal arguments, aka options:
 
-        --author-home-directory: --author-home-directory=<local file path>
-            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --centre-column: --centre-column=<number>
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --co-service-directory: --co-service-directory=<URI reference>
@@ -54,6 +52,8 @@
         --glyph-test-font: --glyph-test-font=<local file path> | none
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --quiet
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
+        --re-ref: --re-ref=<translation> [|| <translation>] ...
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --verbose
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
