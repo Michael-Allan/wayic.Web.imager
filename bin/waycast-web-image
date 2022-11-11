@@ -82,11 +82,11 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
         sP.println( "Options, one or more of:" );
         sP.println( "    --centre-column=<number>" );
         sP.println( "    --co-service-directory=<URI reference>" );
-        sP.println( "    --force" );
+        sP.println( "    --forcefully" );
         sP.println( "    --glyph-test-font=<local file path> | none" );
-        sP.println( "    --quiet" );
+        sP.println( "    --quietly" );
         sP.println( "    --reference-mapping=;<pattern>;<replacement>; [|| ;<pattern>;<replacement>;] ..." );
-        sP.println( "    --verbose" );
+        sP.println( "    --verbosely" );
         sP.println( "    --verbosity=0|1|2" );
         exit( status ); }
 
