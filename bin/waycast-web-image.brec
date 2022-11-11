@@ -53,7 +53,7 @@
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --quiet
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-        --re-ref: --re-ref=<translation> [|| <translation>] ...
+        --reference-mapping: --reference-mapping=<translation> [|| <translation>] ...
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --verbose
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
