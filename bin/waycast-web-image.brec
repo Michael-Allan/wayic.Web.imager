@@ -26,6 +26,8 @@
 
     - The positional argument may be preceded by one or more nominal arguments, aka options:
 
+        --author-home-directory: --author-home-directory=<file path>
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --centre-column: --centre-column=<number>
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --co-service-directory: --co-service-directory=<URI reference>
