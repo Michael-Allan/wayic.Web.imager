@@ -17,7 +17,7 @@ public final class Project {
 
     /** The output directory of the present project.
       */
-    public static final Path outDirectory = Path.of( getProperty("java.io.tmpdir"),
+    public static final Path projectOutputDirectory = Path.of( getProperty("java.io.tmpdir"),
       "wayic.Web.imager_" + getProperty("user.name") );
 
 
