@@ -62,12 +62,12 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
 
 
 
-    /** Whether `p` is contained in a waycast.
+    /** Whether the file at `p` is contained in a waycast.
       */
     private static boolean isIntracast( Path p ) {
-        while( (p = p.getParent()) != null ) {
-            if( waycastDirectoryName.equals( p.getFileName() )) {
-                final Path s = p.resolve( signatureWayFile );
+        while( (p = p.getParent()).getNameCount() > 0 ) {
+            if( waycastDirectoryName.equals( p.getFileName().toString() )) {
+                final Path s = p.resolve( signatureWayFileName );
                 if( exists(s) && !isDirectory(s) ) return true; }}
         return false; }
 
@@ -77,11 +77,11 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
 
 
 
-    private static final Path signatureWayFile = Path.of( "README.brec" );
+    private static final String signatureWayFileName = "README.brec";
 
 
 
-    private static final Path waycastDirectoryName = Path.of( "way" );
+    private static final String waycastDirectoryName = "way";
 
 
 
