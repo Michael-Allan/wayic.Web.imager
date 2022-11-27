@@ -21,7 +21,7 @@ Installation instructions for the waycast Web imager
         4+ Test your access to the `waycast-web-image` command.
             >+ wayic/Web/imager/bin/waycast-web-image --help
             /
-            ⇒  Usage: breccia-web-image [<options>] <boundary path>
+            ⇒  Usage: waycast-web-image [<options>] <boundary path>
            
                         ⋮
 
