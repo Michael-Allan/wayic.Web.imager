@@ -3,6 +3,8 @@ package wayic.Web.imager;
 import Breccia.parser.*;
 import Breccia.Web.imager.*;
 import Breccia.XML.translator.BrecciaXCursor;
+import Java.CharacterPointer;
+import java.net.URI;
 import java.nio.file.Path;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -35,8 +37,8 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
 
 
     public @Override void finish( Path sourceFile, final Path imageFile ) throws ErrorAtFile {
-        if( isIntracast( imageFile )) super.finish( sourceFile, imageFile );
-        else            extracastTranslator.finish( sourceFile, imageFile ); }
+        if( isIntracast( sourceFile )) super.finish( sourceFile, imageFile );
+        else             extracastTranslator.finish( sourceFile, imageFile ); }
 
 
 
@@ -62,18 +64,26 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
 
 
 
-    /** Whether the file at `p` is contained in a waycast.
+    /** Whether the given file is contained in a waycast.
       */
-    private static boolean isIntracast( Path p ) {
-        while( (p = p.getParent()).getNameCount() > 0 ) {
-            if( waycastDirectoryName.equals( p.getFileName().toString() )) {
-                final Path s = p.resolve( signatureWayFileName );
-                if( exists(s) && !isDirectory(s) ) return true; }}
-        return false; }
+    private static boolean isIntracast( final Path f ) { return ownerWaycast(f.getParent()) != null; }
 
 
 
     private final ImagingOptions opt;
+
+
+
+    /** Returns the directory of the apparent waycast wherein `p` is contained (which may be `p` itself),
+      * or null if `p` lies outside of a waycast.
+      */
+    private static Path ownerWaycast( Path p ) {
+        while( p.getNameCount() > 0 ) {
+            if( waycastDirectoryName.equals( p.getFileName().toString() )) {
+                final Path s = p.resolve( signatureWayFileName );
+                if( exists(s) && !isDirectory(s) ) return p; }
+            p = p.getParent(); }
+        return null; }
 
 
 
@@ -88,6 +98,39 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
    // ━━━  B r e c c i a   H T M L   T r a n s f o r m e r  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
+    protected @Override String hRefLocal( final Path f, final Element eRef, final String sRef,
+          final boolean isAlteredRef, final URI uRef, final Path pRef, final Path pRefAbsolute ) {
+        final String message; {
+            if( pRef.getRoot() != null) { // Not a relative-path reference. [RR]
+                message = "Absolute-path reference in waycast"; }
+            else if( !pRefAbsolute.normalize().startsWith( ownerWaycast(f).normalize() )) {
+                message = "Referent lies outside of the waycast"; }
+            else message = null; }
+        if( message != null  &&  !isPrivatized( contextFractum( eRef ))) { /*
+              Abiding here (as in `hRefRemote`) by an equivalent of a constraint enforced on way models.
+              http://reluk.ca/project/wayic/model/working_notes.brec.xht#reference,malformed,following */
+            final CharacterPointer p = characterPointer( eRef );
+            mould.warnOnce( f, p, message + "; consider marking this reference as private:\n"
+              + mould.markedLine( sRef, p, isAlteredRef )); } /* Yet carry on and form the hyperlink,
+              for the purpose here is satified by flagging the fault in the waysource. */
+        return super.hRefLocal( f, eRef, sRef, isAlteredRef, uRef, pRef, pRefAbsolute ); }
+
+
+
+    protected @Override String hRefRemote( final Path f, final Element eRef, final String sRef,
+          final boolean isAlteredRef, final URI uRef ) {
+        if( uRef.getScheme() == null  &&  !isPrivatized( contextFractum( eRef ))) { /*
+              Abiding here (as in `hRefLocal`) by an equivalent of a constraint enforced on way models.
+              http://reluk.ca/project/wayic/model/working_notes.brec.xht#reference,malformed,following */
+            final CharacterPointer p = characterPointer( eRef );
+            mould.warnOnce( f, p,
+              "Network-path reference in waycast; consider marking this reference as private:\n" // [RR]
+                + mould.markedLine( sRef, p, isAlteredRef )); } /* Yet carry on and form the hyperlink,
+              for the purpose here is satified by flagging the fault in the waysource. */
+        return super.hRefRemote( f, eRef, sRef, isAlteredRef, uRef ); }
+
+
+
     protected @Override void translate( final Document d ) {
         super.translate( d );
         final Node head = d.getFirstChild()/*html*/.getFirstChild();
@@ -96,6 +139,12 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
         head.appendChild( e = d.createElement( "link" ));
         e.setAttribute( "rel", "stylesheet" );
         e.setAttribute( "href", opt.coServiceDirectory() + "wayic/Web/imager/image.css" ); }}
+
+
+
+// NOTE
+// ────
+//   RR · Relative reference.  https://www.rfc-editor.org/rfc/rfc3986#section-4.2
 
 
 
