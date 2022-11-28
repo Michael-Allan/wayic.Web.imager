@@ -110,7 +110,7 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
               Abiding here (as in `hRefRemote`) by an equivalent of a constraint enforced on way models.
               http://reluk.ca/project/wayic/model/working_notes.brec.xht#reference,malformed,following */
             final CharacterPointer p = characterPointer( eRef );
-            mould.warnOnce( f, p, message + "; consider marking this reference as private:\n"
+            mould.warn( f, p, message + "; consider marking this reference as private:\n"
               + mould.markedLine( sRef, p, isAlteredRef )); } /* Yet carry on and form the hyperlink,
               for the purpose here is satified by flagging the fault in the waysource. */
         return super.hRefLocal( f, eRef, sRef, isAlteredRef, uRef, pRef, pRefAbsolute ); }
@@ -123,7 +123,7 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
               Abiding here (as in `hRefLocal`) by an equivalent of a constraint enforced on way models.
               http://reluk.ca/project/wayic/model/working_notes.brec.xht#reference,malformed,following */
             final CharacterPointer p = characterPointer( eRef );
-            mould.warnOnce( f, p,
+            mould.warn( f, p,
               "Network-path reference in waycast; consider marking this reference as private:\n" // [RR]
                 + mould.markedLine( sRef, p, isAlteredRef )); } /* Yet carry on and form the hyperlink,
               for the purpose here is satified by flagging the fault in the waysource. */
