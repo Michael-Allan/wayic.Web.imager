@@ -67,9 +67,9 @@
      See also
     ──────────
         • Working examples
-            : e.g. `alias waycast-web-image` @ non-fractal http://reluk.ca/.bashrc : as called from:
+            : e.g. http://reluk.ca/.bashrc : `alias waycast-web-image`, as called from:
                 : see `^^testing$` @ http://reluk.ca/project/wayic/Web/imager/working_notes.brec.xht
-            : e.g. `waycast-web-image` @ non-fractal http://reluk.ca/sys/bin/publish-files
+            : e.g. http://reluk.ca/sys/bin/publish-files : `waycast-web-image`
         • The `breccia-web-image` command
             : see http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
             / Appropriate only for a boundary path that includes no waycast.
