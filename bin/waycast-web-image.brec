@@ -68,7 +68,7 @@
     ──────────
         • Working examples
             : e.g. http://reluk.ca/.bashrc : `alias waycast-web-image`, as called from:
-                : see `^^testing$` @ http://reluk.ca/project/wayic/Web/imager/working_notes.brec.xht
+                : see `^^testing$` @ http://reluk.ca/project/wayic/Web/imager/working_notes.brec
             : e.g. http://reluk.ca/sys/bin/publish-files : `waycast-web-image`
         • The `breccia-web-image` command
             : see http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
