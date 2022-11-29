@@ -100,33 +100,35 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
 
     protected @Override String hRefLocal( final Path f, final Element eRef, final String sRef,
           final boolean isAlteredRef, final URI uRef, final Path pRef, final Path pRefAbsolute ) {
-        final String message; {
-            if( pRef.getRoot() != null) { // Not a relative-path reference. [RR]
-                message = "Absolute-path reference in waycast"; }
-            else if( !pRefAbsolute.normalize().startsWith( ownerWaycast(f).normalize() )) {
-                message = "Referent lies outside of the waycast"; }
-            else message = null; }
-        if( message != null  &&  !isPrivatized( contextFractum( eRef ))) { /*
-              Abiding here (as in `hRefRemote`) by an equivalent of a constraint enforced on way models.
-              http://reluk.ca/project/wayic/model/working_notes.brec.xht#reference,malformed,following */
-            final CharacterPointer p = characterPointer( eRef );
-            mould.warn( f, p, message + "; consider marking this reference as private:\n"
-              + mould.markedLine( sRef, p, isAlteredRef )); } /* Yet carry on and form the hyperlink,
-              for the purpose here is satified by flagging the fault in the waysource. */
+        if( !isAlteredRef ) { // For what follows serves as a lint check on the original source only.
+            final String message; {
+                if( pRef.getRoot() != null) { // Not a relative-path reference. [RR]
+                    message = "Absolute-path reference in waycast"; }
+                else if( !pRefAbsolute.normalize().startsWith( ownerWaycast(f).normalize() )) {
+                    message = "Referent lies outside of the waycast"; }
+                else message = null; }
+            if( message != null  &&  !isPrivatized( contextFractum( eRef ))) { /*
+                  Abiding here (as in `hRefRemote`) by an equivalent of a constraint on way models.
+                  http://reluk.ca/project/wayic/model/working_notes.brec.xht#reference,malformed,following */
+                final CharacterPointer p = characterPointer( eRef );
+                mould.warn( f, p, message + "; consider marking this reference as private:\n"
+                  + mould.markedLine( sRef, p, isAlteredRef )); }} /* Yet proceed with hyperlinking,
+                  for the purpose here is satified by flagging the fault in the waysource. */
         return super.hRefLocal( f, eRef, sRef, isAlteredRef, uRef, pRef, pRefAbsolute ); }
 
 
 
     protected @Override String hRefRemote( final Path f, final Element eRef, final String sRef,
           final boolean isAlteredRef, final URI uRef ) {
-        if( uRef.getScheme() == null  &&  !isPrivatized( contextFractum( eRef ))) { /*
-              Abiding here (as in `hRefLocal`) by an equivalent of a constraint enforced on way models.
-              http://reluk.ca/project/wayic/model/working_notes.brec.xht#reference,malformed,following */
-            final CharacterPointer p = characterPointer( eRef );
-            mould.warn( f, p,
-              "Network-path reference in waycast; consider marking this reference as private:\n" // [RR]
-                + mould.markedLine( sRef, p, isAlteredRef )); } /* Yet carry on and form the hyperlink,
-              for the purpose here is satified by flagging the fault in the waysource. */
+        if( !isAlteredRef ) { // For what follows serves as a lint check on the original source only.
+            if( uRef.getScheme() == null  &&  !isPrivatized( contextFractum( eRef ))) { /*
+                  Abiding here (as in `hRefLocal`) by an equivalent of a constraint on way models.
+                  http://reluk.ca/project/wayic/model/working_notes.brec.xht#reference,malformed,following */
+                final CharacterPointer p = characterPointer( eRef );
+                mould.warn( f, p, // ↓ [RR]
+                  "Network-path reference in waycast; consider marking this reference as private:\n"
+                    + mould.markedLine( sRef, p, isAlteredRef )); }} /* Yet proceed with hyperlinking,
+                  for the purpose here is satified by flagging the fault in the waysource. */
         return super.hRefRemote( f, eRef, sRef, isAlteredRef, uRef ); }
 
 
