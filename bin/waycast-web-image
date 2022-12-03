@@ -1,4 +1,4 @@
-#!/usr/bin/env --split-string=${JDK_HOME}/bin/java @wayic/Web/imager/java_arguments \c [SS]
+#!/usr/bin/env --split-string=${JDK_HOME}/bin/java @building/Makeshift/java_arguments @building/Makeshift/java_javac_arguments \c [SS]
 package wayic.Web.imager; // [AFN]
 
 // This command runs directly from the present source file, it needs no compiling.
