@@ -49,6 +49,8 @@
                                `<CS>/Breccia/Web/imager/FairfaxHD.woff2`
                         : see https://www.kreativekorp.com/software/fonts/fairfaxhd.shtml
 
+        --fakely
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --forcefully
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         --glyph-test-font: --glyph-test-font=<file path> | none
