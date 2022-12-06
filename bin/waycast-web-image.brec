@@ -49,17 +49,17 @@
                                `<CS>/Breccia/Web/imager/FairfaxHD.woff2`
                         : see https://www.kreativekorp.com/software/fonts/fairfaxhd.shtml
 
-        -fakely
+        -fake
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-        -forcefully
+        -force
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         -glyph-test-font: -glyph-test-font=<file path> | none
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-        -quietly
-            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         -reference-mapping: -reference-mapping=<translation> [|| <translation>] ...
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-        -verbosely
+        -speak
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
+        -stifle
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         -verbosity: -verbosity=0|1|2
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
