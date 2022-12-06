@@ -1,7 +1,7 @@
 `waycast-web-image` - Make a Web image
 
         waycast-web-image  [<options>]  <boundary path>
-        waycast-web-image  --help | -?
+        waycast-web-image  -help | -?
 
     - The `waycast-web-image` command makes a Web image delimited by the given boundary path,
       which is the path of a single file or directory.
@@ -26,11 +26,11 @@
 
     - The positional argument may be preceded by one or more nominal arguments, aka options:
 
-        --author-home-directory: --author-home-directory=<file path>
+        -author-home-directory: -author-home-directory=<file path>
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-        --centre-column: --centre-column=<number>
+        -centre-column: -centre-column=<number>
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-        --co-service-directory: --co-service-directory=<URI reference CS>
+        -co-service-directory: -co-service-directory=<URI reference CS>
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
             - The co-service directory must contain the following auxiliary files at a minimum.
                     : cf. @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
@@ -49,19 +49,19 @@
                                `<CS>/Breccia/Web/imager/FairfaxHD.woff2`
                         : see https://www.kreativekorp.com/software/fonts/fairfaxhd.shtml
 
-        --fakely
+        -fakely
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-        --forcefully
+        -forcefully
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-        --glyph-test-font: --glyph-test-font=<file path> | none
+        -glyph-test-font: -glyph-test-font=<file path> | none
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-        --quietly
+        -quietly
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-        --reference-mapping: --reference-mapping=<translation> [|| <translation>] ...
+        -reference-mapping: -reference-mapping=<translation> [|| <translation>] ...
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-        --verbosely
+        -verbosely
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
-        --verbosity: --verbosity=0|1|2
+        -verbosity: -verbosity=0|1|2
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
 
 
@@ -69,9 +69,8 @@
      See also
     ──────────
         • Working examples
-            : e.g. http://reluk.ca/.bashrc : `alias waycast-web-image`, as called from:
-                : see `^^testing$` @ http://reluk.ca/project/wayic/Web/imager/working_notes.brec
-            : e.g. http://reluk.ca/sys/bin/publish-files : `waycast-web-image`
+            : e.g. `^^testing$` @ http://reluk.ca/project/wayic/Web/imager/working_notes.brec
+            : e.g. http://reluk.ca/sys/bin/publish-files
         • The `breccia-web-image` command
             : see http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
             / Appropriate only for a boundary path that includes no waycast.

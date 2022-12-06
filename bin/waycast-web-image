@@ -47,7 +47,7 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
         final var argsP = new ArrayList<String>();
         for( final String arg: arguments ) {
             exitOnDemand( arg );
-            (arg.startsWith("--") ? argsN : argsP).add( arg ); }
+            (arg.charAt(0) == '-' ? argsN : argsP).add( arg ); }
         try( final var command = new WaycastWebImageCommand( argsN, argsP )) {
             if( !command.run() ) exit( 1 ); }}
 
@@ -72,24 +72,24 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
 
 
     private static void exitOnDemand( final String arg ) {
-        if( arg.equals("-?") || arg.equals("--help") ) exitWithUsage( System.out, 0 ); }
+        if( arg.equals("-?") || arg.equals("-help") ) exitWithUsage( System.out, 0 ); }
 
 
 
     private static void exitWithUsage( final PrintStream sP, final int status ) {
         sP.println( "Usage: " + commandName + " [<options>] <boundary path>" );
-        sP.println( "       " + commandName + " --help | -?" );
+        sP.println( "       " + commandName + " -help | -?" );
         sP.println( "Options, one or more of:" );
-        sP.println( "    --author-home-directory=<file path>" );
-        sP.println( "    --centre-column=<number>" );
-        sP.println( "    --co-service-directory=<URI reference>" );
-        sP.println( "    --fakely" );
-        sP.println( "    --forcefully" );
-        sP.println( "    --glyph-test-font=<local file path> | none" );
-        sP.println( "    --quietly" );
-        sP.println( "    --reference-mapping=;<pattern>;<replacement>; [|| ;<pattern>;<replacement>;] ..." );
-        sP.println( "    --verbosely" );
-        sP.println( "    --verbosity=0|1|2" );
+        sP.println( "    -author-home-directory=<file path>" );
+        sP.println( "    -centre-column=<number>" );
+        sP.println( "    -co-service-directory=<URI reference>" );
+        sP.println( "    -fakely" );
+        sP.println( "    -forcefully" );
+        sP.println( "    -glyph-test-font=<local file path> | none" );
+        sP.println( "    -quietly" );
+        sP.println( "    -reference-mapping=;<pattern>;<replacement>; [|| ;<pattern>;<replacement>;] ..." );
+        sP.println( "    -verbosely" );
+        sP.println( "    -verbosity=0|1|2" );
         exit( status ); }
 
 

@@ -19,7 +19,7 @@ Installation instructions for the waycast Web imager
             : join @ http://reluk.ca/project/Breccia/Web/imager/project_installation.brec
             >+ build wayic/Web/imager class-files
         4+ Test your access to the `waycast-web-image` command.
-            >+ wayic/Web/imager/bin/waycast-web-image --help
+            >+ wayic/Web/imager/bin/waycast-web-image -help
             /
             ⇒  Usage: waycast-web-image [<options>] <boundary path>
            
