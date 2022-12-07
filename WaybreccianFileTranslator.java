@@ -133,8 +133,8 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
 
 
 
-    protected @Override void translate( final Document d ) {
-        super.translate( d );
+    protected @Override void translate( final Path sourceFile, final Document d ) {
+        super.translate( sourceFile, d );
         final Node head = d.getFirstChild()/*html*/.getFirstChild();
         assert hasName( "head", head );
         Element e;
