@@ -107,7 +107,7 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
                 else if( !pRefAbsolute.normalize().startsWith( ownerWaycast(f).normalize() )) {
                     message = "Referent lies outside of the waycast"; }
                 else message = null; }
-            if( message != null  &&  !isPrivatized( contextFractum( eRef ))) { /*
+            if( message != null  &&  !isPrivatized( ownerFractum( eRef ))) { /*
                   Abiding here (as in `hRefRemote`) by an equivalent of a constraint on way models.
                   http://reluk.ca/project/wayic/model/working_notes.brec.xht#reference,malformed,following */
                 final CharacterPointer p = characterPointer( eRef );
@@ -121,7 +121,7 @@ public final class WaybreccianFileTranslator extends BreccianFileTranslator<Wayb
     protected @Override String hRefRemote( final Path f, final Element eRef, final String sRef,
           final boolean isAlteredRef, final URI uRef ) {
         if( !isAlteredRef ) { // For what follows serves as a lint check on the original source only.
-            if( uRef.getScheme() == null  &&  !isPrivatized( contextFractum( eRef ))) { /*
+            if( uRef.getScheme() == null  &&  !isPrivatized( ownerFractum( eRef ))) { /*
                   Abiding here (as in `hRefLocal`) by an equivalent of a constraint on way models.
                   http://reluk.ca/project/wayic/model/working_notes.brec.xht#reference,malformed,following */
                 final CharacterPointer p = characterPointer( eRef );
