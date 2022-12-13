@@ -22,9 +22,12 @@
         <boundary path>
             / The path of a file or directory.
             - Sets the bounds of the Web image: any Breccian source file stored at or under this path
-              is eligible for imaging.
+              is eligible for imaging unless explicitly excluded.
+                : re `explicitly excluded` see `^^-exclude`
 
-    - The positional argument may be preceded by one or more nominal arguments, aka options:
+    - Any number of nominal arguments, aka options, may accompany the positional argument:
+        / Nominal arguments may appear anywhere on the command line,
+          they need not precede the positional argument.
 
         -author-home-directory: -author-home-directory=<file path>
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
@@ -49,6 +52,8 @@
                                `<CS>/Breccia/Web/imager/FairfaxHD.woff2`
                         : see https://www.kreativekorp.com/software/fonts/fairfaxhd.shtml
 
+        -exclude: -exclude=<pattern>
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         -fake
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         -force
@@ -71,6 +76,7 @@
         • Working examples
             : e.g. `^^testing$` @ http://reluk.ca/project/wayic/Web/imager/working_notes.brec
             : e.g. http://reluk.ca/sys/bin/publish-files
+            : e.g. http://reluk.ca/sys/bin/test-image
         • The `breccia-web-image` command
             : see http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
             / Appropriate only for a boundary path that includes no waycast.

@@ -36,7 +36,7 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
         if( n != 1 ) {
             err.println( commandName + ": Expecting 1 argument, found " + n );
             exitWithUsage( err, 1 ); }
-        boundaryPath = Path.of(argsP.get(0)).toAbsolutePath(); }
+        boundaryPath = Path.of(argsP.get(0)).toAbsolutePath().normalize(); }
 
 
 
@@ -83,9 +83,10 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
         sP.println( "    -author-home-directory=<file path>" );
         sP.println( "    -centre-column=<number>" );
         sP.println( "    -co-service-directory=<URI reference>" );
+        sP.println( "    -exclude=<pattern>" );
         sP.println( "    -fake" );
         sP.println( "    -force" );
-        sP.println( "    -glyph-test-font=<local file path> | none" );
+        sP.println( "    -glyph-test-font=<file path> | none" );
         sP.println( "    -reference-mapping=;<pattern>;<replacement>; [|| ;<pattern>;<replacement>;] ..." );
         sP.println( "    -speak" );
         sP.println( "    -stifle" );
