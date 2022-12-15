@@ -70,6 +70,14 @@
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
 
 
+    ━━━━━
+     Bug
+    ─────
+        - Parallel runs of `waycast-web-image` by the same user may lead to unexpected results.
+            : see `^^- Parallel runs` @ `^^ Bug` @
+              http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
+
+
     ━━━━━━━━━━
      See also
     ──────────
