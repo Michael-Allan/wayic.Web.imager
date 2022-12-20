@@ -15,7 +15,7 @@
                   http://reluk.ca/project/Breccia/Web/imager/ExternalResources.java :
                   Typically these are Breccian referent files.
         - The working directory must be the command directory.
-            : see `^^working directory$` @ `^^shell commands$` @
+            : see `^*working directory$` @ `^*shell commands$` @
               http://reluk.ca/project/Java/editorial_guidelines.brec
     - One positional argument is required:
 
@@ -23,7 +23,7 @@
             / The path of a file or directory.
             - Sets the bounds of the Web image: any Breccian source file stored at or under this path
               is eligible for imaging unless explicitly excluded.
-                : re `explicitly excluded` see `^^-exclude`
+                : re `explicitly excluded` see `^*-exclude`
 
     - Any number of nominal arguments, aka options, may accompany the positional argument:
         / Nominal arguments may appear anywhere on the command line,
@@ -74,7 +74,7 @@
      Bug
     ─────
         - Parallel runs of `waycast-web-image` by the same user may lead to unexpected results.
-            : see `^^- Parallel runs` @ `^^ Bug` @
+            : see `^*- Parallel runs` @ `^+Bug` @
               http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
 
 
@@ -82,7 +82,7 @@
      See also
     ──────────
         • Working examples
-            : e.g. `^^testing$` @ http://reluk.ca/project/wayic/Web/imager/working_notes.brec
+            : e.g. `^*testing$` @ http://reluk.ca/project/wayic/Web/imager/working_notes.brec
             : e.g. http://reluk.ca/sys/bin/publish-files
             : e.g. http://reluk.ca/sys/bin/test-image
         • The `breccia-web-image` command
