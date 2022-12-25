@@ -11,6 +11,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import wayic.Waybrec.parser.WaybrecCursor;
 
+import static Breccia.Web.imager.ImageNodes.ownerFractum;
 import static java.nio.file.Files.exists;
 import static java.nio.file.Files.isDirectory;
 import static Java.Nodes.hasName;
