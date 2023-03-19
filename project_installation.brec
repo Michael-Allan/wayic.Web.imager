@@ -13,7 +13,7 @@ Installation instructions for the waycast Web imager
                 / The command directory is where project installations are accessible by their
                   proper paths.  The present project, for example, will shortly be accessible
                   at `wayic/Web/imager`.
-                    : see `^*command directory$` @ http://reluk.ca/project/lexicon.brec
+                    : see `^*command directory$` @ http://reluk.ca/project/glossary.brec
             >+ git clone http://reluk.ca/var/repo/git/wayic.Web.imager.git wayic/Web/imager
         3+ Build the software.
             : join @ http://reluk.ca/project/Breccia/Web/imager/project_installation.brec
