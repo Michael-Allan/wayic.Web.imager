@@ -87,6 +87,7 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
         sP.println( "    -fake" );
         sP.println( "    -force" );
         sP.println( "    -glyph-test-font=<file path> | none" );
+        sP.println( "    -math" );
         sP.println( "    -reference-mapping=;<pattern>;<replacement>; [|| ;<pattern>;<replacement>;] ..." );
         sP.println( "    -speak" );
         sP.println( "    -stifle" );
@@ -138,4 +139,4 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
 
 
 
-                                                   // Copyright © 2020-2022  Michael Allan.  Licence MIT.
+                                                   // Copyright © 2020-2023  Michael Allan.  Licence MIT.

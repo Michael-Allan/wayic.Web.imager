@@ -60,6 +60,8 @@
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         -glyph-test-font: -glyph-test-font=<file path> | none
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
+        -math
+            : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         -reference-mapping: -reference-mapping=<translation> [|| <translation>] ...
             : see @ http://reluk.ca/project/Breccia/Web/imager/bin/breccia-web-image.brec
         -speak
@@ -91,4 +93,4 @@
 
 
 
-                                                    \ Copyright © 2020-2022  Michael Allan.  Licence MIT.
+                                                    \ Copyright © 2020-2023  Michael Allan.  Licence MIT.
