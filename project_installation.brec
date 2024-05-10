@@ -3,7 +3,7 @@ Installation instructions for the waycast Web imager
     initial set-up
         1+ Ensure the following projects are installed.
             • Makeshift
-                : see http://reluk.ca/project/building/Makeshift/
+                : see http://reluk.ca/project/Makeshift/
             • The Breccia Web imager
                 : see http://reluk.ca/project/Breccia/Web/imager/
             • Waybrec Parser
