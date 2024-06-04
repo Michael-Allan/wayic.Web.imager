@@ -1,10 +1,11 @@
 #!/usr/bin/env --split-string=${JDK_HOME}/bin/java @Makeshift/java_arguments @Makeshift/java_javac_arguments \c [SS]
-package wayic.Web.imager; // [AFN]
 
 // This command runs directly from the present source file, it needs no compiling.
 
 import Breccia.parser.plain.BrecciaCursor;
-import Breccia.Web.imager.*;
+import Breccia.Web.imager.BreccianFileTranslator;
+import Breccia.Web.imager.FileTranslator;
+import Breccia.Web.imager.ImageMould;
 import Breccia.XML.translator.BrecciaXCursor;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -12,6 +13,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import wayic.Waybrec.parser.WaybrecCursor;
+import wayic.Web.imager.ImagingOptions;
+import wayic.Web.imager.WaybreccianFileTranslator;
 
 import static Breccia.Web.imager.ImagingCommands.image;
 import static java.lang.System.err;
@@ -130,8 +133,14 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
 //   AFN  Atypical file naming is allowed here.  ‘The compiler does not enforce the optional restriction
 //        defined at the end of JLS §7.6, that a type in a named package should exist in a file whose
 //        name is composed from the type name followed by the .java extension.’
-//        http://openjdk.java.net/jeps/330
-//        https://docs.oracle.com/javase/specs/jls/se15/html/jls-7.html#jls-7.6
+//        <https://openjdk.org/jeps/330>
+//        <https://docs.oracle.com/javase/specs/jls/se11/html/jls-7.html#jls-7.6>
+//
+//        No longer, however, does this allowance extend to the package name.  While in JDK releases
+//        prior to 22 “the launcher's source-file mode was permissive about which package, if any,
+//        was declared”, current releases enforce a correspondence between the declared package name
+//        and the file path.  Failing this, the launcher aborts with “end of path to source file
+//        does not match its package name”.  <https://openjdk.org/jeps/458>
 //
 //   SS · Here the long form `--split-string` (as opposed to `-S`) enables Emacs to recognize this file
 //        as Java source code.  See the note apropos of ‘source-launch files encoded with a shebang’ at
@@ -139,4 +148,4 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
 
 
 
-                                                   // Copyright © 2020-2023  Michael Allan.  Licence MIT.
+                                                   // Copyright © 2020-2024  Michael Allan.  Licence MIT.
