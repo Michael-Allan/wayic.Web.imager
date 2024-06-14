@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 import wayic.Waybrec.parser.WaybrecCursor;
 import wayic.Web.imager.ImagingOptions;
+import wayic.Web.imager.Project;
 import wayic.Web.imager.WaybreccianFileTranslator;
 
 import static Breccia.Web.imager.ImagingCommands.image;
 import static java.lang.System.err;
 import static java.lang.System.exit;
-import static wayic.Web.imager.Project.projectOutputDirectory;
 
 
 /** A shell command to make a Web image.
@@ -106,7 +106,7 @@ public final class WaycastWebImageCommand implements AutoCloseable { // [AFN]
     /** @return True on success, false on failure.
       */
     private boolean run() {
-        return image( commandName, boundaryPath, opt, new TranslatorMaker(), projectOutputDirectory ); }
+        return image( commandName, boundaryPath, opt, new TranslatorMaker(), Project.outputDirectory ); }
 
 
 

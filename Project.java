@@ -17,7 +17,7 @@ public final class Project {
 
     /** The output directory of the present project.
       */
-    public static final Path projectOutputDirectory = Path.of( getProperty("java.io.tmpdir"),
+    public static final Path outputDirectory = Path.of( getProperty("java.io.tmpdir"),
       "wayic.Web.imager_" + getProperty("user.name") );
 
 
@@ -31,4 +31,4 @@ public final class Project {
 
 
 
-                                                  // Copyright © 2020, 2022  Michael Allan.  Licence MIT.
+                                            // Copyright © 2020, 2022, 2024  Michael Allan.  Licence MIT.
